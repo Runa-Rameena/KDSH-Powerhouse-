@@ -47,7 +47,7 @@ NEUTRAL_WEIGHT = -0.0025  # very small penalty for neutral evidence
 
 # Decision thresholds
 CONTRADICTION_TAU = 2.0
-CONTRADICT_RATIO = 1.5
+CONTRADICT_RATIO = 1.8  # tightened slightly (was 1.5) to reduce over-triggering of contradictions
 MIN_SUPPORT_THRESHOLD = 0.05  # lower threshold to allow positives
 EPS = 1e-6
 

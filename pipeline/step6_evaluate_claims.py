@@ -35,8 +35,8 @@ def evaluate_pair(claim_text: str, chunk_text: str, sim: float, category: str):
         adj_sim = sim * 2.0
 
     # Strong support for relatively high similarity on this scale
-    # Lowered threshold slightly (0.24 -> 0.20) to allow borderline high-adj-sim chunks
-    if adj_sim >= 0.20:
+    # Lowered threshold slightly (0.24 -> 0.20), now conservatively reduced to 0.18 to surface more borderline supports
+    if adj_sim >= 0.18:
         eval_label = 'SUPPORTS'
         # Apply a modest boost to support confidences (set to +0.15 above sim)
         confidence = min(1.0, sim + 0.15)
@@ -81,8 +81,13 @@ def run():
         # Attempt to read the claims payload (contains story_id and claims list)
         claims_file = (Path('artifacts') / 'backstory_claims' / f'claims_{row_id}.json')
         payload = json.loads(claims_file.read_text()) if claims_file.exists() else {}
-        story_id = payload.get('story_id') if payload else None
-        claims_list = payload.get('claims', []) if payload else []
+        # Handle payload being dict or list (robustness): if list, use first element if dict
+        if isinstance(payload, list):
+            payload0 = payload[0] if len(payload) > 0 and isinstance(payload[0], dict) else {}
+        else:
+            payload0 = payload or {}
+        story_id = payload0.get('story_id') if payload0 else None
+        claims_list = payload0.get('claims', []) if payload0 else []
 
         for claim_id, hits in retrieved.items():
             category = 'assumptions'

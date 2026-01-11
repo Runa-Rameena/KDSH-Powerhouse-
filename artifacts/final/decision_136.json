@@ -1,5 +1,5 @@
 {
   "id": "136",
   "predicted_label": 0,
-  "rationale": "ratio>1.50 (C/S=15.28, S_clipped=0.05) | C=0.76, S=0.05"
+  "rationale": "DECISION=CONTRADICT | rule=ratio | C=1.53 | S=0.05 | ratio=30.55 | thresh=1.80"
 }

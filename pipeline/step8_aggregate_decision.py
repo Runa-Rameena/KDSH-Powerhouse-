@@ -45,6 +45,15 @@ def run():
         row_id = f.stem.split('_', 1)[1]
         df = pd.read_csv(f)
         max_confidence = float(df['confidence'].max()) if 'confidence' in df.columns else 0.0
+        # identify the evaluation of the highest-confidence chunk
+        if 'confidence' in df.columns and not df.empty:
+            try:
+                top_idx = int(df['confidence'].idxmax())
+                top_evaluation = df.loc[top_idx, 'evaluation'] if 'evaluation' in df.columns else None
+            except Exception:
+                top_evaluation = None
+        else:
+            top_evaluation = None
         # story-level temporal flags are per story_id — read story_id from the scores file if available
         story_id = None
         if 'story_id' in df.columns:
@@ -85,45 +94,62 @@ def run():
                 score_support += NEUTRAL_WEIGHT * float(r['confidence'])
 
         # decision logic using multiple checks
-        reason = ''
-        decision = 1
         # avoid ratio explosion by clipping support to a sensible floor (MIN_SUPPORT_THRESHOLD)
         S_clipped = max(score_support, MIN_SUPPORT_THRESHOLD)
         support_was_clipped = score_support < MIN_SUPPORT_THRESHOLD
         # enforce the small positive floor on the support score so the threshold check and ratio use the clipped value
         score_support = S_clipped
 
+        decision = 1
+        rule = None
+        rule_details = {}
+        # Strong contradiction by magnitude
         if score_contradict > CONTRADICTION_TAU:
             decision = 0
-            reason = f'C>{CONTRADICTION_TAU:.2f} (C={score_contradict:.2f})'
+            rule = 'C>tau'
+            rule_details = {'C': score_contradict, 'tau': CONTRADICTION_TAU}
+        # Allow support decision early if we have explicit SUPPORTS or a single high-confidence chunk
+        elif support_count > 0 or (max_confidence >= SUPPORT_CONFIDENCE_MIN and top_evaluation != 'CONTRADICTS'):
+            decision = 1
+            rule = 'support'
+            rule_details = {'support_count': support_count, 'max_confidence': max_confidence, 'top_evaluation': top_evaluation, 'S': score_support}
+        # Strong contradiction by ratio
         elif (score_contradict / (score_support + EPS)) > CONTRADICT_RATIO:
             decision = 0
-            reason = f'ratio>{CONTRADICT_RATIO:.2f} (C/S={score_contradict / (score_support + EPS):.2f}, S_clipped={score_support:.2f})'
+            rule = 'ratio'
+            rule_details = {'C': score_contradict, 'S': score_support, 'ratio': score_contradict / (score_support + EPS), 'thresh': CONTRADICT_RATIO}
+        # Insufficient support
         elif score_support < MIN_SUPPORT_THRESHOLD:
-            # This should not trigger for clipped rows, kept for safety
             decision = 0
-            reason = f'S<min_support ({score_support:.2f} < {MIN_SUPPORT_THRESHOLD:.2f})'
+            rule = 'S<min_support'
+            rule_details = {'S': score_support, 'min_support': MIN_SUPPORT_THRESHOLD}
         else:
-            # Require at least one explicit SUPPORTS chunk to predict support, or a single high-confidence chunk
-            if support_count > 0 or max_confidence >= SUPPORT_CONFIDENCE_MIN:
-                decision = 1
-                reason = 'support'
-            else:
-                # No explicit SUPPORTS evidence — treat as non-support (likely neutral)
-                decision = 0
-                reason = 'no_support_evidence (S_clipped)'
+            decision = 0
+            rule = 'no_support_evidence'
+            rule_details = {'support_count': support_count, 'max_confidence': max_confidence, 'S': score_support}
 
         # emphasize late contradictions
         late_c = flags.get('contradictions_late', 0)
-        rationale = f"{reason} | C={score_contradict:.2f}, S={score_support:.2f}"
+
+        # Build a standardized rationale string for clarity and downstream parsing
+        decision_str = 'SUPPORT' if decision == 1 else 'CONTRADICT'
+        parts = [f"DECISION={decision_str}", f"rule={rule}"]
+        for k in ['C', 'S', 'ratio', 'thresh', 'tau', 'min_support', 'support_count', 'max_confidence']:
+            if k in rule_details:
+                val = rule_details[k]
+                if isinstance(val, float):
+                    parts.append(f"{k}={val:.2f}")
+                else:
+                    parts.append(f"{k}={val}")
         if late_c > 0:
-            rationale += f" | {late_c} late contradiction(s)"
+            parts.append(f"late_contradictions={int(late_c)}")
+        rationale = " | ".join(parts)
 
         out = {'id': row_id, 'predicted_label': int(decision), 'rationale': rationale}
         out_path = FINAL_DIR / f'decision_{row_id}.json'
         out_path.write_text(json.dumps(out, indent=2))
         if out_path.exists():
-            logging.info('Step8: Wrote decision for %s to %s (reason=%s)', row_id, out_path, reason)
+            logging.info('Step8: Wrote decision for %s to %s (rationale=%s)', row_id, out_path, rationale)
         else:
             logging.error('Step8: Failed to write decision for %s to %s', row_id, out_path)
 
@@ -136,7 +162,7 @@ def run():
             'support_count': int(support_count),
             'max_confidence': float(max_confidence),
             'ratio': float(score_contradict / (score_support + EPS)),
-            'reason': reason,
+            'reason': rule,
             'rationale': rationale,
             'story_id': story_id
         }
