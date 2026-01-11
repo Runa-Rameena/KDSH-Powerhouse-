@@ -1,0 +1,11 @@
+{
+  "row_id": "101",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "a4ca957023c7",
+      "claim_text": "At eighteen he joined a radical republican cell, speaking in cafés and back-room meetings for the revolutionary cause.",
+      "category": "assumptions"
+    }
+  ]
+}

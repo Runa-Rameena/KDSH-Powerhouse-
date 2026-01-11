@@ -1,0 +1,6 @@
+row_id,story_id,claim_id,chunk_id,similarity,evaluation,confidence,start_pos,end_pos
+63,,cecc50d9b3ed,The Count of Monte Cristo_chunk_756,0.046511627906976744,CONTRADICTS,0.3965116279069767,2646000,2646614
+63,,cecc50d9b3ed,In Search of the Castaways_chunk_101,0.025069637883008356,NEUTRAL,0.04504178272980501,353500,357500
+63,,cecc50d9b3ed,In Search of the Castaways_chunk_22,0.023872679045092837,NEUTRAL,0.044323607427055704,77000,81000
+63,,cecc50d9b3ed,In Search of the Castaways_chunk_235,0.022099447513812154,NEUTRAL,0.043259668508287295,822500,826131
+63,,cecc50d9b3ed,In Search of the Castaways_chunk_16,0.021798365122615803,NEUTRAL,0.04307901907356949,56000,60000

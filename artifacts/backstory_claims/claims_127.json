@@ -1,0 +1,11 @@
+{
+  "row_id": "127",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "34b747c40e8d",
+      "claim_text": "During twenty years in one cell he kept his wits by calculating Mediterranean tides, an exercise that later let him predict guards’ rounds in the original story.",
+      "category": "assumptions"
+    }
+  ]
+}

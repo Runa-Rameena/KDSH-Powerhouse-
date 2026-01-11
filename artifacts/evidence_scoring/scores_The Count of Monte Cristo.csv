@@ -1,0 +1,6 @@
+row_id,story_id,claim_id,chunk_id,similarity,evaluation,confidence,start_pos,end_pos
+The Count of Monte Cristo,,d13e4b0be883,In Search of the Castaways_chunk_0,0.0,NEUTRAL,0.03,0,4000
+The Count of Monte Cristo,,d13e4b0be883,The Count of Monte Cristo_chunk_417,0.0,NEUTRAL,0.03,1459500,1463500
+The Count of Monte Cristo,,d13e4b0be883,The Count of Monte Cristo_chunk_418,0.0,NEUTRAL,0.03,1463000,1467000
+The Count of Monte Cristo,,d13e4b0be883,The Count of Monte Cristo_chunk_419,0.0,NEUTRAL,0.03,1466500,1470500
+The Count of Monte Cristo,,d13e4b0be883,The Count of Monte Cristo_chunk_420,0.0,NEUTRAL,0.03,1470000,1474000

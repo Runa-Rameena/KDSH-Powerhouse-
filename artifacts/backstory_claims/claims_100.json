@@ -1,0 +1,11 @@
+{
+  "row_id": "100",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "e0d87653f67a",
+      "claim_text": "Growing up in Paris he devoured Voltaire and Rousseau, burning with enthusiasm for liberty and equality.",
+      "category": "assumptions"
+    }
+  ]
+}

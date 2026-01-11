@@ -1,0 +1,11 @@
+{
+  "row_id": "99",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "29cc81d408a1",
+      "claim_text": "Born into a Parisian legal family, he absorbed his father’s staunch republicanism and his mother’s gentler sensibility, learning to balance reason with feeling.",
+      "category": "early_life"
+    }
+  ]
+}

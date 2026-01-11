@@ -1,0 +1,16 @@
+{
+  "row_id": "75",
+  "story_id": "In Search of the Castaways",
+  "claims": [
+    {
+      "claim_id": "eeb07f081eb9",
+      "claim_text": "He had an extraordinary memory for geographical knowledge, and could determine the location of shipwrecks by observing tidal changes.",
+      "category": "assumptions"
+    },
+    {
+      "claim_id": "b982312f5032",
+      "claim_text": "He viewd volcanic eruptions as divine punishment against colonizers.",
+      "category": "assumptions"
+    }
+  ]
+}

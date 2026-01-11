@@ -1,0 +1,11 @@
+{
+  "row_id": "111",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "ba4e805b5f71",
+      "claim_text": "Though bodily strength ebbed he still pulled strings through old friends, quietly encouraging several anti-royalist moves.",
+      "category": "assumptions"
+    }
+  ]
+}

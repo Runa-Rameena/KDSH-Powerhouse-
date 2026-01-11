@@ -1,0 +1,11 @@
+{
+  "row_id": "123",
+  "story_id": "The Count of Monte Cristo",
+  "claims": [
+    {
+      "claim_id": "cc1b4b2a7ed8",
+      "claim_text": "In Rome he and Noirtier de Villefort studied Napoleon’s secret letters together, then quarrelled over whether to publish their contents.",
+      "category": "assumptions"
+    }
+  ]
+}

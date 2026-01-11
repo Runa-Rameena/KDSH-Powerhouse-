@@ -1,0 +1,16 @@
+{
+  "row_id": "78",
+  "story_id": "In Search of the Castaways",
+  "claims": [
+    {
+      "claim_id": "e048d10f6fca",
+      "claim_text": "His father guarded the island’s paramount chief; his mother, a princess from a neighbouring island, came in marriage to seal an alliance.",
+      "category": "assumptions"
+    },
+    {
+      "claim_id": "97f75e9c8f1a",
+      "claim_text": "At five he saw her assassinated in inter-tribal strife; to stop further unrest his father ordered the murderer’s entire clan executed, and the child never forgot the sound of flesh stripped from bone.",
+      "category": "early_life"
+    }
+  ]
+}

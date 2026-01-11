@@ -1,0 +1,8 @@
+{
+  "method": "tfidf",
+  "shape": [
+    993,
+    2048
+  ],
+  "index_backend": "sklearn"
+}

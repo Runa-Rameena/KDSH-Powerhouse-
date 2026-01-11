@@ -1,0 +1,5 @@
+{
+  "id": "32",
+  "predicted_label": 0,
+  "rationale": "ratio>1.50 (C/S=30.52, S_clipped=0.05) | C=1.53, S=0.05"
+}

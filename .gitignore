@@ -1,0 +1,7 @@
+# Ignore cache and logs only
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.log
+.DS_Store
