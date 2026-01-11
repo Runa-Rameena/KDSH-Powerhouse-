@@ -68,6 +68,25 @@ def run():
                 logging.info('Step4: No claims extracted for row_id=%s (story_id=%s) — wrote empty claims file', row_id, sid)
             else:
                 logging.info('Step4: Extracted %d claims for row_id=%s (story_id=%s)', len(claims), row_id, sid)
+
+            # --- Optional GenAI extraction (runs in parallel when enabled) ---
+            try:
+                from .step0_config import GENAI_ENABLE_CLAIM_EXTRACTION, GENAI_MODEL_VERSION
+                if GENAI_ENABLE_CLAIM_EXTRACTION:
+                    import pipelinegenai.genai_integration as genai_integration
+                    from . import llm_provider
+                    ga_res = genai_integration.extract_claims_genai(backstory, backstory_id=row_id, llm_call=llm_provider.llm_call, model_version=GENAI_MODEL_VERSION)
+                    genai_out_path = BACKSTORY_DIR / f'claims_genai_{row_id}.json'
+                    genai_out_path.write_text(json.dumps(ga_res, indent=2, ensure_ascii=False))
+                    # simple disagreement logging: compare sets of claim texts
+                    heuristic_texts = set(c.get('claim_text') for c in claims)
+                    genai_texts = set(c.get('text') for c in ga_res.get('claims', []))
+                    disagreement = heuristic_texts != genai_texts
+                    disag = {'row_id': row_id, 'story_id': sid, 'heuristic_count': len(heuristic_texts), 'genai_count': len(genai_texts), 'disagreement': disagreement, 'heuristic_texts': list(heuristic_texts), 'genai_texts': list(genai_texts)}
+                    (BACKSTORY_DIR / f'disagreements_{row_id}.json').write_text(json.dumps(disag, indent=2, ensure_ascii=False))
+                    logging.info('Step4: Wrote GenAI claims to %s and disagreement=%s', genai_out_path, disagreement)
+            except Exception as e:
+                logging.warning('Step4: GenAI claim extraction skipped/failed for row_id=%s: %s', row_id, str(e))
     logging.info('Step4: Wrote claims JSON files to %s', BACKSTORY_DIR)
 
 

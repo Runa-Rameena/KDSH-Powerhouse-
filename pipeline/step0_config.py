@@ -51,6 +51,14 @@ CONTRADICT_RATIO = 1.8  # tightened slightly (was 1.5) to reduce over-triggering
 MIN_SUPPORT_THRESHOLD = 0.05  # lower threshold to allow positives
 EPS = 1e-6
 
+# === GenAI feature flags (can be toggled via env vars) ===
+GENAI_ENABLE_CLAIM_EXTRACTION = os.environ.get('GENAI_ENABLE_CLAIM_EXTRACTION', 'false').lower() == 'true'
+GENAI_ENABLE_REASONER = os.environ.get('GENAI_ENABLE_REASONER', 'false').lower() == 'true'
+# modes: 'disabled' | 'parallel' | 'primary' — 'parallel' means run GenAI alongside heuristics; 'primary' means use GenAI outputs as primary decisions when validated
+GENAI_MODE = os.environ.get('GENAI_MODE', 'parallel')
+GENAI_MODEL_VERSION = os.environ.get('GENAI_MODEL_VERSION', 'genai-v1')
+GENAI_SUPPORT_SIMILARITY_THRESHOLD = float(os.environ.get('GENAI_SUPPORT_SIMILARITY_THRESHOLD', '0.65'))
+
 # Export helper
 def save_json(path, obj):
     path = Path(path)

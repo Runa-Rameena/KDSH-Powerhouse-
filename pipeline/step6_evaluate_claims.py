@@ -8,7 +8,7 @@ import json
 import logging
 from pathlib import Path
 import pandas as pd
-from .step0_config import RETRIEVAL_DIR, EVIDENCE_DIR, CHUNKING_DIR
+from .step0_config import RETRIEVAL_DIR, EVIDENCE_DIR, CHUNKING_DIR, BACKSTORY_DIR
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
@@ -89,6 +89,7 @@ def run():
         story_id = payload0.get('story_id') if payload0 else None
         claims_list = payload0.get('claims', []) if payload0 else []
 
+        disagreements = []
         for claim_id, hits in retrieved.items():
             category = 'assumptions'
             claim_text = ''
@@ -98,9 +99,47 @@ def run():
                     claim_text = c.get('claim_text', '')
                     break
 
+            # Heuristic evaluations (unchanged and remain authoritative for now)
             for h in hits:
                 lbl, conf = evaluate_pair(claim_text, h.get('text', ''), float(h.get('similarity', 0.0)), category)
                 rows.append({'row_id': row_id, 'story_id': story_id, 'claim_id': claim_id, 'chunk_id': h['chunk_id'], 'similarity': h.get('similarity', 0.0), 'evaluation': lbl, 'confidence': conf, 'start_pos': h.get('start_pos'), 'end_pos': h.get('end_pos')})
+
+            # --- Optional GenAI reasoner (run in parallel when enabled) ---
+            try:
+                from .step0_config import GENAI_ENABLE_REASONER, GENAI_MODEL_VERSION, GENAI_SUPPORT_SIMILARITY_THRESHOLD
+                if GENAI_ENABLE_REASONER:
+                    import pipelinegenai.genai_integration as genai_integration
+                    from . import llm_provider
+                    # prepare evidence chunks in the expected minimal schema
+                    evidence_chunks = [{'chunk_id': h['chunk_id'], 'text': h.get('text',''), 'similarity_score': float(h.get('similarity',0.0))} for h in hits]
+                    ga = genai_integration.reason_claim_vs_evidence_genai({'claim_id': claim_id, 'text': claim_text, 'entities': []}, evidence_chunks, llm_call=llm_provider.llm_call, model_version=GENAI_MODEL_VERSION)
+                    # Run hallucination guard using pipeline heuristics thresholds
+                    guard = genai_integration.hallucination_guard({'claim_id': claim_id, 'text': claim_text, 'entities': []}, ga['decision'], evidence_chunks, support_threshold=GENAI_SUPPORT_SIMILARITY_THRESHOLD)
+                    # Log disagreement entries
+                    disagreements.append({'claim_id': claim_id, 'genai_decision': ga['decision'], 'guard': guard, 'heuristic_hits': [{'chunk_id': h['chunk_id'], 'heuristic_label': evaluate_pair(claim_text, h.get('text',''), float(h.get('similarity',0.0)), category)[0], 'similarity': h.get('similarity',0.0)} for h in hits], 'source': 'reasoner', 'model_version': GENAI_MODEL_VERSION})
+            except Exception as e:
+                # non-fatal: log and continue
+                logging.warning('Step6: GenAI reasoner skipped/failed for row_id=%s claim_id=%s: %s', row_id, claim_id, str(e))
+
+        # write/merge disagreements file if any
+        if disagreements:
+            out_file = BACKSTORY_DIR / f'disagreements_{row_id}.json'
+            existing = {}
+            if out_file.exists():
+                try:
+                    existing = json.loads(out_file.read_text(encoding='utf-8')) or {}
+                except Exception:
+                    existing = {}
+            # Normalize existing into a list of disagreement entries
+            existing_list = []
+            if isinstance(existing, dict) and isinstance(existing.get('disagreements'), list):
+                existing_list = existing.get('disagreements')
+            elif isinstance(existing, dict) and existing:
+                # older Step4 format — wrap into list
+                existing_list = [existing]
+            merged = {'row_id': row_id, 'disagreements': existing_list + disagreements}
+            out_file.write_text(json.dumps(merged, indent=2, ensure_ascii=False))
+            logging.info('Step6: Wrote/merged disagreements for %s with %d total items (new=%d)', row_id, len(merged['disagreements']), len(disagreements))
         df = pd.DataFrame(rows)
         out_path = EVIDENCE_DIR / f'scores_{row_id}.csv'
         df.to_csv(out_path, index=False)

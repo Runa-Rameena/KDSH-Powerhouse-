@@ -1,0 +1,29 @@
+{
+  "$id": "https://example.org/schemas/extracted_claims.json",
+  "type": "object",
+  "properties": {
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "text": { "type": "string", "minLength": 1 },
+          "entities": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "anchor_span": {
+            "anyOf": [
+              { "type": "array", "items": [{ "type": "integer", "minimum": 0 }, { "type": "integer", "minimum": 0 }], "minItems": 2, "maxItems": 2 },
+              { "type": "null" }
+            ]
+          },
+          "type": { "type": "string", "enum": ["FACT", "EVENT", "CAUSE_EFFECT", "TRAIT"] },
+          "source_backstory_id": { "type": "string" },
+          "model_version": { "type": "string" },
+          "prompt_template_hash": { "type": "string" }
+        },
+        "required": ["text","entities","type"]
+      }
+    }
+  },
+  "required": ["claims"]
+}

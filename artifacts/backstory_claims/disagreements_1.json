@@ -1,0 +1,66 @@
+{
+  "row_id": "1",
+  "disagreements": [
+    {
+      "claim_id": "503d0e44a828",
+      "genai_decision": {
+        "claim_id": "503d0e44a828",
+        "label": "INSUFFICIENT",
+        "evidence_ids": [],
+        "rationale": "no evidence provided",
+        "model_version": null,
+        "prompt_template_hash": null,
+        "validated": false,
+        "validation_failures": [
+          "overall_low_similarity"
+        ]
+      },
+      "guard": {
+        "decision": {
+          "claim_id": "503d0e44a828",
+          "label": "INSUFFICIENT",
+          "evidence_ids": [],
+          "rationale": "no evidence provided",
+          "model_version": null,
+          "prompt_template_hash": null,
+          "validated": false,
+          "validation_failures": [
+            "overall_low_similarity"
+          ]
+        },
+        "flags": [
+          "overall_low_similarity"
+        ]
+      },
+      "heuristic_hits": [
+        {
+          "chunk_id": "The Count of Monte Cristo_chunk_756",
+          "heuristic_label": "SUPPORTS",
+          "similarity": 0.05660377358490566
+        },
+        {
+          "chunk_id": "In Search of the Castaways_chunk_27",
+          "heuristic_label": "SUPPORTS",
+          "similarity": 0.044444444444444446
+        },
+        {
+          "chunk_id": "In Search of the Castaways_chunk_235",
+          "heuristic_label": "SUPPORTS",
+          "similarity": 0.0425531914893617
+        },
+        {
+          "chunk_id": "In Search of the Castaways_chunk_29",
+          "heuristic_label": "SUPPORTS",
+          "similarity": 0.038929440389294405
+        },
+        {
+          "chunk_id": "In Search of the Castaways_chunk_169",
+          "heuristic_label": "SUPPORTS",
+          "similarity": 0.03867403314917127
+        }
+      ],
+      "source": "reasoner",
+      "model_version": "test-v1"
+    }
+  ]
+}

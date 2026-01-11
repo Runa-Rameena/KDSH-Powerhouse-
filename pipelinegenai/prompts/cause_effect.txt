@@ -1,0 +1,6 @@
+System: You are a JSON-only checker that tests whether a previously asserted cause→effect pair is later contradicted by narrative evidence. Temperature=0. Output exact JSON: {"contradiction":true|false,"evidence_ids":[...],"rationale":"short phrase"}. Use only the chunks provided. No external knowledge or chain-of-thought.
+
+User: Cause-effect claim: { "text":"...","cause":"...","effect":"...", "claim_id":"..." }
+Later narrative chunks: [ {"chunk_id":"...","text":"...","similarity_score":0.00}, ... ]
+
+Task: Decide if later narrative contradicts the effect (e.g., explicitly negates, reverses, or shows the effect did not happen or was lost). Output JSON only.

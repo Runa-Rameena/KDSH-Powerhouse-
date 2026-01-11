@@ -1,0 +1,15 @@
+{
+  "$id": "https://example.org/schemas/claim_decision.json",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "label": { "type": "string", "enum": ["SUPPORT","CONTRADICT","INSUFFICIENT"] },
+    "evidence_ids": { "type": "array", "items": { "type": "string" } },
+    "rationale": { "type": "string", "maxLength": 300 },
+    "model_version": { "type": "string" },
+    "prompt_template_hash": { "type": "string" },
+    "validated": { "type": "boolean" },
+    "validation_failures": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["claim_id","label","evidence_ids","rationale"]
+}

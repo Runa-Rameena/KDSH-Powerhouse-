@@ -1,0 +1,11 @@
+{
+  "$id": "https://example.org/schemas/cause_effect_check.json",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string" },
+    "contradiction": { "type": "boolean" },
+    "evidence_ids": { "type": "array", "items": { "type": "string" } },
+    "rationale": { "type": "string" }
+  },
+  "required": ["claim_id","contradiction","evidence_ids","rationale"]
+}
