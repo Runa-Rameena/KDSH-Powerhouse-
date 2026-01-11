@@ -1,4 +1,22 @@
-# Ignore cache and logs only
+# Ignore artifacts, Books, and large generated files
+# Artifacts and generated data
+artifacts/
+KDSH/artifacts/
+
+# Books (large text files)
+Books/
+
+# Large archives / downloads
+*.tar.gz*
+*.aria2
+*.zip
+*.tgz
+
+# Indexes / embeddings
+artifacts/indexing/
+**/embeddings.npy
+
+# Python caches and logs
 __pycache__/
 **/__pycache__/
 *.pyc
