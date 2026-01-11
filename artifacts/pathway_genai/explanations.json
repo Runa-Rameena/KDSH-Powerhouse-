@@ -1,0 +1,1081 @@
+[
+  {
+    "claim_id": "100_claim_1",
+    "claim_text": "Growing up in Paris he devoured Voltaire and Rousseau, burning with enthusiasm for liberty and equality.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_125",
+      "The Count of Monte Cristo_chunk_124",
+      "The Count of Monte Cristo_chunk_2017"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "102_claim_1",
+    "claim_text": "During the Revolution he acted as a militant republican, attended major assemblies and helped organise trials of royalists.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_643",
+      "The Count of Monte Cristo_chunk_2490",
+      "The Count of Monte Cristo_chunk_1411"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "104_claim_1",
+    "claim_text": "His parents were targeted in a reprisal for supporting the Revolution; his mother was killed, deepening his distrust of authority.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2826",
+      "The Count of Monte Cristo_chunk_2400",
+      "The Count of Monte Cristo_chunk_532"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "105_claim_1",
+    "claim_text": "He became head of a clandestine anti-Bonaparte society, organising underground actions to sap the Emperor’s support.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1522",
+      "The Count of Monte Cristo_chunk_260",
+      "The Count of Monte Cristo_chunk_209"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "106_claim_1",
+    "claim_text": "At a society meeting he met Fernand; though on opposite sides they used each other—Noirtier exploiting Fernand’s military information.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_642",
+      "The Count of Monte Cristo_chunk_62",
+      "The Count of Monte Cristo_chunk_58"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "107_claim_1",
+    "claim_text": "Napoleon’s triumph at Waterloo ended his hopes; in 1815 he withdrew from active plotting and turned to family affairs.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_270",
+      "The Count of Monte Cristo_chunk_1227",
+      "The Count of Monte Cristo_chunk_271"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "108_claim_1",
+    "claim_text": "He married a gentle apolitical woman, hoping domestic peace would replace political strife, and pinned on his son Villefort the hope that the boy would carry his ideals forward.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2985",
+      "The Count of Monte Cristo_chunk_138",
+      "The Count of Monte Cristo_chunk_139"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "109_claim_1",
+    "claim_text": "Villefort’s drift toward the royalists disappointed him; father and son argued politics at every family gathering.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_247",
+      "The Count of Monte Cristo_chunk_264",
+      "The Count of Monte Cristo_chunk_643"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "10_claim_1",
+    "claim_text": "While recording thirty-two dialects along the Murray River he was expelled by British colonists; after his notes were burned he vowed to “measure every hidden truth with my own feet.”",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_730",
+      "In search of the castaways_chunk_468",
+      "The Count of Monte Cristo_chunk_666"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "112_claim_1",
+    "claim_text": "Through underground circles he met the Count of Monte Cristo and fed the avenger vital information, lending invisible aid to the plot against his enemies.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2731",
+      "The Count of Monte Cristo_chunk_2308",
+      "The Count of Monte Cristo_chunk_2403"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "113_claim_1",
+    "claim_text": "Born in Parma to a theological family—his father studied ancient manuscripts, his mother wrote poetry in several tongues.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2418",
+      "In search of the castaways_chunk_30",
+      "The Count of Monte Cristo_chunk_2419"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "116_claim_1",
+    "claim_text": "In Lisbon he backed constitutionalist Prince Pedro, was branded a Jacobin plotter out to poison King John VI and fled conservatives’ pursuit.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2110",
+      "In search of the castaways_chunk_669",
+      "The Count of Monte Cristo_chunk_2536"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "117_claim_1",
+    "claim_text": "While escaping he hid lifetime research manuscripts in a Madeira monastery cellar—the eventual clue to Monte Cristo’s treasure.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_96",
+      "In search of the castaways_chunk_94",
+      "In search of the castaways_chunk_93"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "118_claim_1",
+    "claim_text": "French gendarmes seized him at Toulon, accusing him of planning to bomb Bourbon restoration festivities; the real motive was that his code-breaking threatened a cardinal’s secret correspondence.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1398",
+      "The Count of Monte Cristo_chunk_429",
+      "The Count of Monte Cristo_chunk_183"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "11_claim_1",
+    "claim_text": "One night he saw first mate Ayrton secretly meet slave-traders; while shadowing them he was slashed across the left forearm with a dagger.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_442",
+      "In search of the castaways_chunk_854",
+      "In search of the castaways_chunk_853"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "120_claim_1",
+    "claim_text": "He invented a “salt-blood” ink that revealed under heat, used it to help a Corsican patriot escape, and was transferred to the more secure Château d’If for the trouble.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2328",
+      "The Count of Monte Cristo_chunk_358",
+      "The Count of Monte Cristo_chunk_180"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "122_claim_1",
+    "claim_text": "At a Vienna-congress salon he briefly watched young prosecutor Villefort tamper with evidence against an Italian revolutionary.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2537",
+      "The Count of Monte Cristo_chunk_1718",
+      "The Count of Monte Cristo_chunk_197"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "123_claim_1",
+    "claim_text": "In Rome he and Noirtier de Villefort studied Napoleon’s secret letters together, then quarrelled over whether to publish their contents.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2069",
+      "The Count of Monte Cristo_chunk_2182",
+      "The Count of Monte Cristo_chunk_2096"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "125_claim_1",
+    "claim_text": "In India he watched British troops crush a rising; to spare the rebel leader further torture he gave the man a merciful death, shaping his ethic of “killing when kindness demands it.”",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_730",
+      "In search of the castaways_chunk_759",
+      "The Count of Monte Cristo_chunk_3051"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "126_claim_1",
+    "claim_text": "His sister was burned as a witch for spurning a nobleman; the injustice fed a lifelong hatred of institutional rot.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_889",
+      "The Count of Monte Cristo_chunk_291",
+      "In search of the castaways_chunk_888"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "128_claim_1",
+    "claim_text": "His invisible-ink formula came from temple-mural restoration in India, first used to rescue local epics the colonists had defaced.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_75",
+      "The Count of Monte Cristo_chunk_358",
+      "The Count of Monte Cristo_chunk_817"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "12_claim_1",
+    "claim_text": "He declined to take part in charting the maiden voyage of the Britannia; when news of her wreck arrived he filled three diary pages with the sentence “I could have prevented it.”",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_429",
+      "In search of the castaways_chunk_910",
+      "In search of the castaways_chunk_438"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "130_claim_1",
+    "claim_text": "What seemed an epileptic fit was in fact sudden death from years of drinking prison water laced with lead.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_401",
+      "In search of the castaways_chunk_236",
+      "The Count of Monte Cristo_chunk_72"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "134_claim_1",
+    "claim_text": "After graduation a secret society enlisted him as strategist and propagandist in a campaign against corrupt rulers.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2099",
+      "The Count of Monte Cristo_chunk_644",
+      "The Count of Monte Cristo_chunk_964"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "137_claim_1",
+    "claim_text": "Suspected again in 1815, he was re-arrested and shipped to the Château d’If, this time for life.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_625",
+      "The Count of Monte Cristo_chunk_2450",
+      "The Count of Monte Cristo_chunk_1117"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "138_claim_1",
+    "claim_text": "Long political warfare severed him from his family; the once-noble house declined and could offer no help.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2328",
+      "The Count of Monte Cristo_chunk_2044",
+      "The Count of Monte Cristo_chunk_2549"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "139_claim_1",
+    "claim_text": "Enlightenment ideals of liberty, equality and fraternity sustained him, turning even the dungeon into a classroom for hope.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_125",
+      "The Count of Monte Cristo_chunk_124",
+      "In search of the castaways_chunk_440"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "13_claim_1",
+    "claim_text": "His deference to Lady Glenarvan echoed the tangled feelings he had once held for his mother; by becoming the expedition’s “living map” he tried to atone for failing to protect her.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_903",
+      "The Count of Monte Cristo_chunk_1475",
+      "In search of the castaways_chunk_180"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "14_claim_1",
+    "claim_text": "Mutual recognition with Major McNabbs: both had lived among the Charrúa and confirmed their identities by exchanging certain hand signs.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1604",
+      "The Count of Monte Cristo_chunk_2723",
+      "In search of the castaways_chunk_519"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "17_claim_1",
+    "claim_text": "His father died early; his mother remarried a French officer, so the boy grew up fluent in English and French, later adding Spanish from an English tutor.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1927",
+      "In search of the castaways_chunk_19",
+      "In search of the castaways_chunk_21"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "18_claim_1",
+    "claim_text": "He once found bribery entries in his father’s old ledgers, reported them, and saw his father’s colleague dismissed; temporary gossip made him wary of the upper nobility.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_581",
+      "The Count of Monte Cristo_chunk_722",
+      "The Count of Monte Cristo_chunk_711"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "19_claim_1",
+    "claim_text": "Because he spoke both French and English he was posted to a Mediterranean merchant fleet where he learned basic seamanship and celestial navigation.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2411",
+      "The Count of Monte Cristo_chunk_2450",
+      "The Count of Monte Cristo_chunk_504"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "1_claim_1",
+    "claim_text": "At twelve, Jacques Paganel fell in love with geography after reading Captain Cook’s nautical journal; with a homemade telescope he studied the stars and papered his bedroom walls with maps he drew himself, earning his father’s scolding for neglecting “serious” pursuits.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_88",
+      "In search of the castaways_chunk_84",
+      "In search of the castaways_chunk_108"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "20_claim_1",
+    "claim_text": "After a failed attempt to save a drowning comrade he was injured; the naval commander’s praise when he recovered left him with a strong sense of duty toward rescue.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_277",
+      "In search of the castaways_chunk_276",
+      "The Count of Monte Cristo_chunk_230"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "23_claim_1",
+    "claim_text": "After his mother died she entrusted him with the care of his toddler half-brother; the child was later taken to Europe by the French stepfather and never heard from again, leaving Paganel with a lifelong dread of “separation by life and death.”",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2053",
+      "The Count of Monte Cristo_chunk_2160",
+      "The Count of Monte Cristo_chunk_2159"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "25_claim_1",
+    "claim_text": "On the eve of sailing aboard Duncan he met ex-General von Wallace and obtained notes on South-American inland geography and native customs.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2082",
+      "In search of the castaways_chunk_106",
+      "In search of the castaways_chunk_457"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "26_claim_1",
+    "claim_text": "Born in Liverpool’s slums to an alcoholic sailor father and a mother who died of tuberculosis while he was young, he watched his father be transported for smuggling and then endured an orphanage where nuns pilfered relief supplies, teaching him to despise authority.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2898",
+      "The Count of Monte Cristo_chunk_520",
+      "The Count of Monte Cristo_chunk_722"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "29_claim_1",
+    "claim_text": "The night before the mate was hanged he pressed a dagger engraved with his family crest into the boy’s hand.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_3015",
+      "In search of the castaways_chunk_8",
+      "In search of the castaways_chunk_59"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "31_claim_1",
+    "claim_text": "He rescued the indigenous elder Yurook from colonists and gained tribal protection, learning bush tracking while secretly mapping settler outposts.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2515",
+      "The Count of Monte Cristo_chunk_2693",
+      "In search of the castaways_chunk_535"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "32_claim_1",
+    "claim_text": "During clashes between tribe and settlers he steered both sides toward mutual ruin, then welded the survivors into an underground intelligence web that straddled the two worlds.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_543",
+      "The Count of Monte Cristo_chunk_757",
+      "In search of the castaways_chunk_440"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "34_claim_1",
+    "claim_text": "He found ship’s papers that mentioned an illicit Australian land deal by a British peer and planned to trade the information for a pardon.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_985",
+      "The Count of Monte Cristo_chunk_1460",
+      "In search of the castaways_chunk_54"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "35_claim_1",
+    "claim_text": "The mutiny began when Captain Grant uncovered his forged logbook and threatened to report him; “marooning” was a botched silencing in which Ayrton, thinking fast, locked the captain inside the keel-less lifeboat.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_588",
+      "In search of the castaways_chunk_449",
+      "In search of the castaways_chunk_436"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "36_claim_1",
+    "claim_text": "Ritual disguise: the Bible-quoting habit he had picked up as a mission pupil became a mask for his emotions.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_500",
+      "In search of the castaways_chunk_801",
+      "The Count of Monte Cristo_chunk_999"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "39_claim_1",
+    "claim_text": "After discharge he adopted the alias Ben Joyce and shipped on the Liverpool–Lisbon trader, forming a mentor-friend bond with Captain Dewey and second mate Eddie.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_625",
+      "In search of the castaways_chunk_843",
+      "In search of the castaways_chunk_626"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "40_claim_1",
+    "claim_text": "Skilled in shipboard medicine, he secretly stitched soldiers’ wounds yet distrusted shipmates, keeping a mental log and cultivating a “save-yourself-first” instinct.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_972",
+      "The Count of Monte Cristo_chunk_2340",
+      "The Count of Monte Cristo_chunk_2334"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "41_claim_1",
+    "claim_text": "In Lisbon he unwittingly helped a black-marketeer dodge duty, was introduced to Duncan’s smuggling ring and, using his sea-craft, slipped past patrols several times; guilt nibbled at him yet profit lured him deeper.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_162",
+      "In search of the castaways_chunk_847",
+      "In search of the castaways_chunk_293"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "43_claim_1",
+    "claim_text": "Suspected of colluding with the enemy, he panicked, slipped away in a lifeboat under darkness and fled to the Southern Hemisphere.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_108",
+      "In search of the castaways_chunk_299",
+      "The Count of Monte Cristo_chunk_54"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "45_claim_1",
+    "claim_text": "Watching natives slaughtered in a raid re-awakened his conscience: he cached weapons, torched the trader and raised a stone marker beside the blaze to record his regret and repentance.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2399",
+      "The Count of Monte Cristo_chunk_319",
+      "The Count of Monte Cristo_chunk_404"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "46_claim_1",
+    "claim_text": "Thalcave’s people faded as colonists advanced; his father, last of the tribal guides, knew the pampas geography and animal ways, while his mother died giving birth.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_210",
+      "In search of the castaways_chunk_242",
+      "In search of the castaways_chunk_240"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "46_claim_2",
+    "claim_text": "Boyhood was spent roaming the plains with his father, learning to track, tame horses and steer by the stars.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_489",
+      "The Count of Monte Cristo_chunk_246",
+      "The Count of Monte Cristo_chunk_1933"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "48_claim_1",
+    "claim_text": "Passing as a half-caste gaucho he worked on a ranch, picked up Spanish and the settlers’ rules, yet guarded his tribe’s herb lore and nature beliefs.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_189",
+      "In search of the castaways_chunk_190",
+      "In search of the castaways_chunk_506"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "4_claim_1",
+    "claim_text": "Sitting in on lectures uninvited, he was thrown out after shouting “The secret is on the 37th southern parallel!” while the professor explained Earth’s equatorial bulge.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2970",
+      "In search of the castaways_chunk_883",
+      "In search of the castaways_chunk_448"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "50_claim_1",
+    "claim_text": "He saved an old shepherd bitten by a viper; in gratitude the man gave him a secret map of pampas water-holes and taught him that a guide’s duty is to keep life moving.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2560",
+      "The Count of Monte Cristo_chunk_2559",
+      "The Count of Monte Cristo_chunk_989"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "54_claim_1",
+    "claim_text": "He briefly loved Chilean doctor Mariana, who wanted him to settle down but was refused; she died nursing cholera-stricken Indians.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2243",
+      "The Count of Monte Cristo_chunk_2022",
+      "The Count of Monte Cristo_chunk_630"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "54_claim_2",
+    "claim_text": "When he burned her belongings he kept the brass compass she had given him.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2179",
+      "The Count of Monte Cristo_chunk_1983",
+      "The Count of Monte Cristo_chunk_865"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "55_claim_1",
+    "claim_text": "His first double role: hired by a British Geographical Society expedition, he quietly altered the route to shield sacred Indian sites.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_84",
+      "In search of the castaways_chunk_483",
+      "In search of the castaways_chunk_85"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "57_claim_1",
+    "claim_text": "Early trauma: at seven his father vanished in a local uprising, at nine his mother died of illness; a banished Jesuit, Father Leclere, raised him in a mountain mission.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2984",
+      "The Count of Monte Cristo_chunk_722",
+      "The Count of Monte Cristo_chunk_28"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "5_claim_1",
+    "claim_text": "During an Algerian geological survey he shielded a box of specimens in a sand-storm, was struck on the head and afterwards often mixed up dates and directions.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_364",
+      "The Count of Monte Cristo_chunk_2432",
+      "The Count of Monte Cristo_chunk_2433"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "62_claim_1",
+    "claim_text": "Loss turned him taciturn, acting more than speaking; he felt deep pity for sufferers and stayed calmly watchful toward oppressors.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1902",
+      "The Count of Monte Cristo_chunk_296",
+      "The Count of Monte Cristo_chunk_845"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "63_claim_1",
+    "claim_text": "With the rescue squad he learned enough nautical English to converse with Captain Horace and the sailors.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_672",
+      "The Count of Monte Cristo_chunk_1927",
+      "The Count of Monte Cristo_chunk_206"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "65_claim_1",
+    "claim_text": "British officers marvelled that he handled canoe, coast and jungle with equal ease, shuttling supplies and so preparing his later berth on the Dartmouth.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_836",
+      "In search of the castaways_chunk_837",
+      "The Count of Monte Cristo_chunk_506"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "66_claim_1",
+    "claim_text": "Lord Glenarvan met him briefly at a London Royal Geographical Society dinner, was struck by his encyclopaedic knowledge of mountains and seas and hired him at once as guide for the South-American interior.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_84",
+      "In search of the castaways_chunk_85",
+      "In search of the castaways_chunk_56"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "67_claim_1",
+    "claim_text": "Born on New Zealand’s North-island east coast to a Maori war-chief father and a priestess mother skilled in herbs and star-reading, he saw his father ambushed by a British musket squad, the body mutilated, the left ear taken as trophy; his mother tattooed a vengeance curse on his chest with ochre.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2898",
+      "In search of the castaways_chunk_847",
+      "In search of the castaways_chunk_730"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "68_claim_1",
+    "claim_text": "At ten, migrating with his clan, a flame-shaped birth-mark on his forehead convinced elders he was the reincarnation of the “sun-devouring warrior.” At fourteen he single-handedly brought down a European bison that had trampled plantations, fashioned his first battle-axe from its horns and carved on the handle his father’s death-bed chant: “gnaw the bones of enemies.”",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2984",
+      "The Count of Monte Cristo_chunk_1319",
+      "In search of the castaways_chunk_727"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "69_claim_1",
+    "claim_text": "At seventeen he was poisoned by an uncle during a succession struggle; manuka-bark saved him and left his nature darker.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_281",
+      "The Count of Monte Cristo_chunk_426",
+      "The Count of Monte Cristo_chunk_733"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "69_claim_2",
+    "claim_text": "To obtain powder against the colonists he led thirty warriors against the French merchantman Amethyst, seized flint-lock muskets and picked up basic French, then discovered the captain selling Maori slaves and sacrificed every prisoner to the volcano-god.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_663",
+      "In search of the castaways_chunk_665",
+      "The Count of Monte Cristo_chunk_2990"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "6_claim_1",
+    "claim_text": "In a Marseille waterfront bar he met young Captain Grant; a fierce argument over Magellan Strait tides almost came to blows, but ended in mutual respect and an exchange of pocket-watches.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_379",
+      "In search of the castaways_chunk_114",
+      "In search of the castaways_chunk_106"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "71_claim_1",
+    "claim_text": "During the north-island war he let troops burn an empty village, lured them into a swamp and battered them with captured European cannon; the victory won him the name “Bone-Eater,” but shrapnel crippled his left leg and he thereafter leaned on a peach-wood staff carved with sea-monster totems.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1955",
+      "The Count of Monte Cristo_chunk_2969",
+      "In search of the castaways_chunk_280"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "73_claim_1",
+    "claim_text": "Finding missionaries wrapping opium in Bible pages, he ordered every book burned except the sheepskin map showing ancestral migration routes.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_801",
+      "The Count of Monte Cristo_chunk_1393",
+      "In search of the castaways_chunk_824"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "74_claim_1",
+    "claim_text": "Before each fight he studied the crack-patterns of his mother’s shark-tooth necklace by moonlight to divine the outcome.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_967",
+      "In search of the castaways_chunk_6",
+      "In search of the castaways_chunk_5"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "76_claim_1",
+    "claim_text": "He carried a European pocket-watch taken from the French mate, its inner lid holding a lock of Julia’s hair, which explained both his grasp of mechanical time and his disgust for Christian objects.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_3013",
+      "The Count of Monte Cristo_chunk_794",
+      "The Count of Monte Cristo_chunk_562"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "79_claim_1",
+    "claim_text": "After the killing, elders held a “Blood-and-Bone” rite; he lifted fragments of his mother’s burnt bones to his lips to “breathe in her spirit,” a ritual he repeated whenever catastrophe loomed, turning him gloomy yet unyielding.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_410",
+      "The Count of Monte Cristo_chunk_315",
+      "In search of the castaways_chunk_252"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "83_claim_1",
+    "claim_text": "At eighteen, on the run in Tasmania, he met the escaped convict Ayrton hiding in the bush; the two fugitives pooled their languages and survival skills, raided together for ransom and forged a brotherhood laced with mutual wariness.",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_850",
+      "In search of the castaways_chunk_592",
+      "In search of the castaways_chunk_854"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "84_claim_1",
+    "claim_text": "In a skirmish at a British outpost friendly fire killed several of his comrades; he took bones from their bodies as tokens, swore to shield the survivors and from that moment sealed his emotions.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2826",
+      "In search of the castaways_chunk_207",
+      "In search of the castaways_chunk_714"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "88_claim_1",
+    "claim_text": "Under the alias “Citizen Noirtier” he joined the Girondins, drafted parts of the Revolutionary Code and broke with Robespierre over whether courts should keep formal procedures.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_125",
+      "The Count of Monte Cristo_chunk_2724",
+      "The Count of Monte Cristo_chunk_127"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "89_claim_1",
+    "claim_text": "**Turning Point**: Arguing for procedural justice at Louis XVI’s trial (1793) he was driven from the inner circle, an experience that later anchored his insistence on legal formalism.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_228",
+      "The Count of Monte Cristo_chunk_529",
+      "The Count of Monte Cristo_chunk_1396"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "8_claim_1",
+    "claim_text": "While being helped by a native tribe he won their trust by sketching star-maps and in return learned tracking techniques and herbal lore.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_74",
+      "In search of the castaways_chunk_751",
+      "In search of the castaways_chunk_780"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "90_claim_1",
+    "claim_text": "To obtain royalist intelligence from the Vendée he married Éloïse, daughter of a ruined local noble (1800); when he learned she secretly backed the Chouans he arranged her “accidental” drowning (1802).",
+    "top_chunk_ids": [
+      "In search of the castaways_chunk_95",
+      "The Count of Monte Cristo_chunk_639",
+      "The Count of Monte Cristo_chunk_2583"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "92_claim_1",
+    "claim_text": "**Father-son Rift**: Discovering that his elder son Gérard (Villefort) sought to wed into the old aristocracy, Noirtier publicly burned the Saint-Méran betrothal contract (1804), forcing Villefort to flee to Paris overnight.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2252",
+      "The Count of Monte Cristo_chunk_242",
+      "The Count of Monte Cristo_chunk_1967"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "96_claim_1",
+    "claim_text": "When he saw that Valentine had inherited his trembling hands he began training her to communicate by eye movement (1819); after his own paralysis the method evolved into a blink-code.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1687",
+      "The Count of Monte Cristo_chunk_2044",
+      "The Count of Monte Cristo_chunk_2177"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "98_claim_1",
+    "claim_text": "Hidden Waterloo-era diplomatic letters in his study ensured that political foes dared not silence him, explaining how he could still shield Valentine after losing the power of speech.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_270",
+      "The Count of Monte Cristo_chunk_2036",
+      "The Count of Monte Cristo_chunk_2685"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "99_claim_1",
+    "claim_text": "Born into a Parisian legal family, he absorbed his father’s staunch republicanism and his mother’s gentler sensibility, learning to balance reason with feeling.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_2827",
+      "The Count of Monte Cristo_chunk_2897",
+      "The Count of Monte Cristo_chunk_2898"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  },
+  {
+    "claim_id": "9_claim_1",
+    "claim_text": "He accidentally slipped a farewell letter to his French sweetheart into an academic report; the romance ended, yet the Academy of Sciences praised the document.",
+    "top_chunk_ids": [
+      "The Count of Monte Cristo_chunk_1945",
+      "In search of the castaways_chunk_41",
+      "In search of the castaways_chunk_382"
+    ],
+    "explanation": "",
+    "cited_evidence_ids": [],
+    "hallucination_flag": false,
+    "raw_llm_output": "{}"
+  }
+]
