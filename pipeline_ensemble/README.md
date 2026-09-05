@@ -42,10 +42,10 @@ python3 -m pipeline_ensemble.run_pipeline
 
 | Metric | Score | Detail |
 | :--- | :---: | :--- |
-| **Accuracy** | **63.7%** | Overall classification accuracy on ground-truth dataset |
-| **F1-Score** | **0.779** | Highest F1-Score achieved across all system pipelines |
-| **Recall** | **100.0%** | Perfect recall in detecting valid character backstories |
-| **Precision** | **63.7%** | Balanced precision backed by multi-pipeline consensus |
+| **Accuracy** | **65.0%** | Overall classification accuracy on ground-truth dataset |
+| **F1-Score** | **0.754** | Balanced harmonic precision-recall metric |
+| **Precision** | **68.3%** | Improved precision via multi-model consensus threshold |
+| **Recall** | **84.3%** | Strong capability to capture genuine backstory facts |
 
 ---
 

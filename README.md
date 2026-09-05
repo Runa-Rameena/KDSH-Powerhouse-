@@ -169,10 +169,10 @@ Cross-evaluating all four pipelines against ground-truth character backstory ver
 
 | Evaluation Metric | **Pipeline 1: Pathway RAG** | **Pipeline 2: NLI** | **Pipeline 3: GenAI** | **Pipeline 4: Consensus Ensemble (Tuned $k=8$)** |
 | :--- | :---: | :---: | :---: | :---: |
-| **Accuracy** | **62.5%** | **48.7%** | **62.5%** | **63.7%** |
-| **F1-Score** | **0.727** | **0.468** | **0.746** | **0.779 (Highest)** |
-| **Recall** | **80.0%** | **35.3%** | **86.3%** | **100.0% (Perfect)** |
-| **Precision** | **66.7%** | **69.2%** | **65.7%** | **63.7%** |
+| **Accuracy** | **62.5%** | **48.7%** | **62.5%** | **65.0% (Highest)** |
+| **F1-Score** | **0.727** | **0.468** | **0.746** | **0.754 (Highest)** |
+| **Recall** | **80.0%** | **35.3%** | **86.3%** | **84.3%** |
+| **Precision** | **66.7%** | **69.2%** | **65.7%** | **68.3%** |
 
 ### Benchmark Analysis & Findings
 - **Ensemble Consensus Superiority**: Pipeline 4 (Ensemble) achieves the highest F1-Score (**0.779**) and **100.0% Recall** by eliminating single-model false negatives through weighted voting ($W_1=0.40, W_2=0.20, W_3=0.40$).

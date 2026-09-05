@@ -47,7 +47,7 @@ def run():
         v3 = p3_preds.get(row_id, 1)
 
         weighted_score = (w1 * v1) + (w2 * v2) + (w3 * v3)
-        final_label = 1 if weighted_score >= 0.50 else 0
+        final_label = 1 if weighted_score >= 0.60 else 0
         rationale = f"Ensemble-v1 | score={weighted_score:.2f} | votes={{'P1_RAG': {v1}, 'P2_NLI': {v2}, 'P3_GenAI': {v3}}} | tuned_k={TUNED_TOP_K}"
 
         ensemble_results.append({
@@ -83,7 +83,7 @@ def run():
             v2 = p2_preds.get(rid, 1)
             v3 = p3_preds.get(rid, 1)
             score = (w1 * v1) + (w2 * v2) + (w3 * v3)
-            pred = 1 if score >= 0.50 else 0
+            pred = 1 if score >= 0.60 else 0
             eval_preds.append(pred)
             eval_gts.append(gt)
 
