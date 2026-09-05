@@ -1,8 +1,10 @@
 {
   "contradictions_early": 0,
   "contradictions_mid": 0,
-  "contradictions_late": 2,
+  "contradictions_late": 4,
   "contradiction_positions": [
+    "late",
+    "late",
     "late",
     "late"
   ],

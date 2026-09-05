@@ -1,5 +1,5 @@
 {
   "id": "82",
   "predicted_label": 1,
-  "rationale": "DECISION=SUPPORT | rule=supported | S=4.67 | support_count=3 | max_confidence=0.48"
+  "rationale": "DECISION=SUPPORT | rule=supported | S=4.32 | support_count=3 | max_confidence=0.48"
 }

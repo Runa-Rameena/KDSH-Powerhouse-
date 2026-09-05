@@ -1,6 +1,6 @@
 row_id,story_id,claim_id,chunk_id,similarity,evaluation,confidence,start_pos,end_pos
-114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_756,0.05555555555555555,NEUTRAL,0.027777777777777776,2646000,2646614
-114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_753,0.025089605734767026,NEUTRAL,0.02,2635500,2639500
-114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_502,0.024324324324324326,NEUTRAL,0.02,1757000,1761000
-114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_751,0.023715415019762844,NEUTRAL,0.02,2628500,2632500
-114,The Count of Monte Cristo,c6baa723a934,In Search of the Castaways_chunk_70,0.0226628895184136,NEUTRAL,0.02,245000,249000
+114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_95,0.4956817388779169,SUPPORTS,0.3833333333333333,332500,336500
+114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_88,0.4302358761936549,SUPPORTS,0.3833333333333333,308000,312000
+114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_201,0.42911288900160727,SUPPORTS,0.3833333333333333,703500,707500
+114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_86,0.4241505122613619,SUPPORTS,0.3833333333333333,301000,305000
+114,The Count of Monte Cristo,c6baa723a934,The Count of Monte Cristo_chunk_414,0.40343743349104777,SUPPORTS,0.3833333333333333,1449000,1453000

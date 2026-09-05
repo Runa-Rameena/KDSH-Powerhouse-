@@ -49,7 +49,7 @@ id,predicted_label,rationale
 77,0,77_claim_1:CONTRADICT
 78,0,"78_claim_1:SUPPORT, 78_claim_2:CONTRADICT"
 80,0,80_claim_1:CONTRADICT
-81,0,"81_claim_1:SUPPORT, 81_claim_2:CONTRADICT"
+81,0,"81_claim_2:CONTRADICT, 81_claim_1:SUPPORT"
 82,0,82_claim_1:CONTRADICT
 85,0,85_claim_1:CONTRADICT
 86,0,86_claim_1:CONTRADICT

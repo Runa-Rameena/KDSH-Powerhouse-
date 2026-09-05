@@ -1,20 +1,51 @@
-# GenAI Reasoning & Hallucination Guard Pipeline
+# Pipeline 3: GenAI Reasoner & Hallucination Guard Pipeline
 
-This directory contains the GenAI and LLM-based narrative verification module for the Kharagpur Data Science Hackathon (KDSH).
+This directory contains the **GenAI Reasoning & Hallucination Guard Pipeline**. It combines structured LLM reasoning prompts, Pydantic schema validation, temperature=0 determinism, and lexical anchor guardrails to evaluate backstory claims against novel evidence while guarding against model hallucination.
 
 ---
 
-## Overview
+## Key System Design & Architectural Features
 
-The GenAI pipeline utilizes structured JSON prompts, strict Pydantic/JSON schemas, temperature=0 determinism, and hallucination guardrails to verify character backstory claims against retrieved novel evidence.
+- **Structured Prompts**: Prompt templates in `prompts/` enforce deterministic, structured JSON outputs.
+- **Pydantic Validation**: `models.py` defines schemas for atomic claims, reasoner verdicts, and cause-effect relationships.
+- **Hallucination Guard**: Post-processes reasoner decisions to check whether quoted evidence actually exists in retrieved novel chunks.
+- **Lexical Anchor Verification**: Checks key entities (names, places, dates) before finalizing a contradiction verdict.
 
-### Components
-1. **`models.py`**: Pydantic/dataclass schemas for atomic claims, reasoner verdicts, and cause-effect checks.
-2. **`genai_integration.py`**: Core functions for claim extraction, reasoner invocation, hallucination guarding, and decision aggregation.
-3. **`prompts/`**: Prompt templates for claim extraction and claim-vs-evidence reasoning.
-4. **`schemas/`**: Formal JSON schemas ensuring output conformance.
-5. **`run_pipeline.py`**: End-to-end standalone runner generating verified predictions.
-6. **`tests/test_genai_integration.py`**: Unit tests verifying deterministic reasoning and guardrail behavior.
+---
+
+## System Flow & Component Overview
+
+```
+Input Backstory & Novel Evidence
+              │
+              ▼
+    extract_claims_genai() ────────► Extract atomic claims via GenAI prompts
+              │
+              ▼
+reason_claim_vs_evidence_genai() ──► Evaluate Claim vs Evidence chunks
+              │
+              ▼
+     hallucination_guard() ────────► Verify quoted text against raw chunks
+              │
+              ▼
+  aggregate_claim_decisions() ─────► Aggregate into row verdict & rationale
+              │
+              ▼
+       run_pipeline.py ────────────► Standalone Module Runner
+```
+
+### Module Structure
+
+1. **`models.py`**: Contains Pydantic dataclasses and models (`Claim`, `EvidenceChunk`, `ClaimDecision`, `ReasoningOutput`).
+2. **`genai_integration.py`**:
+   - `extract_claims_genai()`: Extracts testable claim objects from raw backstory text.
+   - `reason_claim_vs_evidence_genai()`: Prompts LLM reasoner to evaluate claim against evidence.
+   - `hallucination_guard()`: Validates that cited evidence snippets exist in original source text.
+   - `aggregate_claim_decisions()`: Combines individual claim decisions into a final row label (`1` or `0`).
+3. **`prompts/`**: Formatted prompt templates for extraction and reasoning.
+4. **`schemas/`**: Formal JSON schemas for output validation.
+5. **`run_pipeline.py`**: End-to-end runner reading `test.csv` and writing outputs.
+6. **`tests/test_genai_integration.py`**: Unit tests verifying deterministic reasoning and guardrail compliance.
 
 ---
 
@@ -22,16 +53,23 @@ The GenAI pipeline utilizes structured JSON prompts, strict Pydantic/JSON schema
 
 ```bash
 # Run end-to-end GenAI pipeline
-python -m pipelinegenai.run_pipeline
+python3 -m pipelinegenai.run_pipeline
 
-# Run unit tests
-python -m unittest pipelinegenai/tests/test_genai_integration.py
+# Run unit tests for GenAI modules
+python3 -m unittest pipelinegenai/tests/test_genai_integration.py
 ```
 
 ---
 
 ## Outputs & Artifacts
 
-- **Pipeline Results**: `pipelinegenai/results.csv`
+- **Local Results**: `pipelinegenai/results.csv`
 - **Root Results**: `results_genai.csv`
-- **Schema**: `id,predicted_label,rationale` (1 = Consistent, 0 = Contradict)
+- **Output Schema**:
+  ```csv
+  id,predicted_label,rationale
+  46,1,"GenAI-v1 | decisions={'SUPPORT': 2, 'CONTRADICT': 0} | validated=True"
+  137,0,"GenAI-v1 | decisions={'SUPPORT': 0, 'CONTRADICT': 1} | validated=True"
+  ```
+  - `predicted_label`: `1` (Consistent / Support), `0` (Contradict)
+  - `rationale`: GenAI model version, decision counts summary, and hallucination validation state.

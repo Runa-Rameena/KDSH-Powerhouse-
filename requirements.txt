@@ -29,4 +29,4 @@ pytest>=7.3.0
 # (Uncomment based on environment / platform)
 # ==========================================
 # faiss-cpu>=1.7.4          # Fast vector similarity search (recommended)
-# pathway>=0.10.0           # Streaming RAG and real-time ingestion (Linux / WSL / Docker only)
+pathway>=0.10.0           # Streaming RAG and real-time ingestion (Linux / WSL / Docker only)

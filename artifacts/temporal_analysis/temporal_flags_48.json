@@ -1,9 +1,7 @@
 {
   "contradictions_early": 0,
   "contradictions_mid": 0,
-  "contradictions_late": 1,
-  "contradiction_positions": [
-    "late"
-  ],
+  "contradictions_late": 0,
+  "contradiction_positions": [],
   "story_length_chars": 1
 }

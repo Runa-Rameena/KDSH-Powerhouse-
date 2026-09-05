@@ -1,5 +1,5 @@
 {
   "id": "62",
   "predicted_label": 0,
-  "rationale": "DECISION=CONTRADICT | rule=C>tau_and_dominates | C=8.35 | S=1.75 | tau=2.00"
+  "rationale": "DECISION=CONTRADICT | rule=C>tau_and_dominates | C=9.82 | S=3.27 | tau=2.00"
 }

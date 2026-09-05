@@ -1,6 +1,6 @@
 row_id,story_id,claim_id,chunk_id,similarity,evaluation,confidence,start_pos,end_pos
-51,In Search of the Castaways,e599391cb7e0,The Count of Monte Cristo_chunk_756,0.04395604395604396,NEUTRAL,0.02197802197802198,2646000,2646614
-51,In Search of the Castaways,e599391cb7e0,The Count of Monte Cristo_chunk_2,0.02763819095477387,SUPPORTS,0.41666666666666663,7000,11000
-51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_17,0.024193548387096774,SUPPORTS,0.41666666666666663,59500,63500
-51,In Search of the Castaways,e599391cb7e0,The Count of Monte Cristo_chunk_157,0.0234375,CONTRADICTS,0.55,549500,553500
-51,In Search of the Castaways,e599391cb7e0,The Count of Monte Cristo_chunk_3,0.02295918367346939,NEUTRAL,0.02,10500,14500
+51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_66,0.5572202977713991,SUPPORTS,0.41666666666666663,231000,235000
+51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_65,0.5277213092158854,CONTRADICTS,0.5166666666666667,227500,231500
+51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_92,0.5170764615595563,SUPPORTS,0.41666666666666663,322000,326000
+51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_62,0.5170272301899709,SUPPORTS,0.41666666666666663,217000,221000
+51,In Search of the Castaways,e599391cb7e0,In Search of the Castaways_chunk_67,0.4974499218066446,CONTRADICTS,0.5166666666666667,234500,238500

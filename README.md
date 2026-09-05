@@ -1,19 +1,20 @@
-# KDSH-Powerhouse: Narrative Consistency & Character Backstory Verification
+# Narrative Consistency & Character Backstory Verification System
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Pathway](https://img.shields.io/badge/Pathway-Streaming%20RAG-green.svg)](https://pathway.com/)
 [![Transformers](https://img.shields.io/badge/%F0%9F%A4%97-Transformers%20NLI-yellow.svg)](https://huggingface.co/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
-An enterprise-grade, multi-pipeline narrative consistency verification system developed for the **Kharagpur Data Science Hackathon (KDSH)**. 
+An enterprise-grade, multi-pipeline narrative consistency verification system designed to validate character backstories against massive 19th-century literary texts (*The Count of Monte Cristo* and *In Search of the Castaways*).
 
-The system validates character backstories against massive literary texts (*The Count of Monte Cristo* and *In Search of the Castaways*) using streaming RAG, Natural Language Inference, and GenAI hallucination guardrails.
+The project implements **three independent, end-to-end verification pipelines**:
+1. **Pathway Streaming RAG & Temporal Evidence Engine**
+2. **Natural Language Inference (NLI) Transformer Pipeline**
+3. **GenAI Reasoner & Hallucination Guard Pipeline**
 
 ---
 
-## Repository Structure & Pipelines
-
-This repository provides **three independent, end-to-end verification pipelines**, each generating its own dedicated `results.csv`:
+## Directory Structure & Pipelines
 
 ```
 KDSH-Powerhouse-/
@@ -22,106 +23,97 @@ KDSH-Powerhouse-/
 │   ├── README.md                          # Detailed documentation for Pipeline 1
 │   ├── run_all.py                         # End-to-end orchestrator for Steps 1-8
 │   ├── step0_config.py to step8_*.py      # Ingestion, Chunking, Retrieval, Scoring, Decision
-│   └── results.csv                        # Dedicated results for Pipeline 1
+│   └── results.csv                        # Subfolder output for Pipeline 1
 ├── pipeline_nli/                          # [Pipeline 2] Natural Language Inference (NLI) Pipeline
 │   ├── README.md                          # Detailed documentation for Pipeline 2
 │   ├── run_pipeline.py                    # End-to-end orchestrator for Steps 1-5
-│   ├── models.py                          # Transformer & calibrated heuristic NLI inference
-│   └── results.csv                        # Dedicated results for Pipeline 2
+│   ├── models.py                          # Transformer NLI inference engine
+│   └── results.csv                        # Subfolder output for Pipeline 2
 ├── pipelinegenai/                         # [Pipeline 3] GenAI Reasoner & Hallucination Guard
 │   ├── README.md                          # Detailed documentation for Pipeline 3
 │   ├── run_pipeline.py                    # End-to-end standalone runner
 │   ├── models.py                          # Pydantic & dataclass validation schemas
-│   └── results.csv                        # Dedicated results for Pipeline 3
+│   └── results.csv                        # Subfolder output for Pipeline 3
 ├── artifacts/                             # Intermediate cached tables, chunks, and embeddings
-├── requirements.txt                       # Unified Python dependencies
+├── requirements.txt                       # Python dependencies
 ├── train.csv                              # Ground-truth labeled character backstories
-├── test.csv                               # Competition test split for evaluation
-├── results.csv                            # Primary Hackathon Submission (Pipeline 1)
-├── results_pipeline.csv                   # Exact alias of Pipeline 1 predictions
-├── results_nli.csv                        # Exact alias of Pipeline 2 (NLI) predictions
-└── results_genai.csv                      # Exact alias of Pipeline 3 (GenAI) predictions
+├── test.csv                               # Test split for evaluation
+├── results_pipeline.csv                   # Root output for Pipeline 1 (Pathway Streaming RAG)
+├── results_nli.csv                        # Root output for Pipeline 2 (NLI Transformers)
+└── results_genai.csv                      # Root output for Pipeline 3 (GenAI Reasoner)
 ```
 
 ---
 
-## Comparison of Results Files
+## Detailed Pipeline Architecture Comparison
 
-All result files strictly follow the competition schema: `id,predicted_label,rationale` (where `1` = Consistent / Support, `0` = Contradict).
+All pipeline outputs strictly adhere to the verification schema: `id,predicted_label,rationale` (where `1` = Consistent / Support, `0` = Contradict).
 
-| Results File | Pipeline | Core Engine | Key Strengths |
-| :--- | :--- | :--- | :--- |
-| **`results.csv`** (Root) | `pipeline/` | Pathway Streaming + TF-IDF/Dense Vector Retrieval + Temporal Progression | Top competition accuracy (~75%) and F1 (~80%); grounded in novel chapter chronology. |
-| **`results_pipeline.csv`** | `pipeline/` | Alias of primary Pathway pipeline | Reproducible copy of `results.csv`. |
-| **`results_nli.csv`** | `pipeline_nli/` | Premise-Hypothesis NLI Transformers | Deep semantic entailment / contradiction reasoning per claim-excerpt pair. |
-| **`results_genai.csv`** | `pipelinegenai/` | Structured JSON LLM + Hallucination Guard | Strictly typed schema enforcement and lexical anchor verification. |
+| Pipeline | Execution Module | Core Technology | Primary Strengths | Detailed Docs |
+| :--- | :--- | :--- | :--- | :--- |
+| **Pipeline 1** | `python3 -m pipeline.run_all` | **Pathway Streaming Tables (`pw.Table`)** + Vector Indexing + Polarity Scoring + Temporal Progression | Top verification accuracy (62.5% validation accuracy, 72.7% F1), high recall (80%), and timeline tracking. | [Pipeline 1 README](pipeline/README.md) |
+| **Pipeline 2** | `python3 -m pipeline_nli.run_pipeline` | **NLI Transformers** (Premise vs Hypothesis Entailment/Contradiction) | Deep semantic claim-excerpt entailment modeling per backstory claim. | [Pipeline 2 README](pipeline_nli/README.md) |
+| **Pipeline 3** | `python3 -m pipelinegenai.run_pipeline` | **Structured JSON LLM** + Pydantic Schema + Hallucination Guardrails | Typed schema enforcement, lexical anchor verification, and cited quote validation. | [Pipeline 3 README](pipelinegenai/README.md) |
 
 ---
 
-## Quickstart & Execution
+## Quickstart & Execution Guide
 
-### Running on Ubuntu / Linux (Recommended for Native Pathway)
-
-Pathway distributes native streaming binary wheels for Linux. To run natively on Ubuntu:
+### 1. Environment Setup
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/Runa-Rameena/KDSH-Powerhouse-.git
 cd KDSH-Powerhouse-
 
-# 2. Set up virtual environment
+# Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-# 3. Install dependencies and Pathway
+# Install unified dependencies and Pathway engine
 pip install -r requirements.txt
 pip install pathway
-
-# 4. Run any of the pipelines:
-python3 -m pipeline.run_all          # Generates results.csv & pipeline/results.csv
-python3 -m pipeline_nli.run_pipeline # Generates results_nli.csv & pipeline_nli/results.csv
-python3 -m pipelinegenai.run_pipeline # Generates results_genai.csv & pipelinegenai/results.csv
 ```
 
-### Running on Windows
+### 2. Running Pipelines
 
-The repository includes a built-in cross-platform sliding-window fallback for Windows, allowing immediate execution without Docker:
+You can run any or all pipelines independently:
 
-```powershell
-# Run primary pipeline
-python -m pipeline.run_all
+```bash
+# Run Pipeline 1 (Pathway Streaming RAG Engine)
+python3 -m pipeline.run_all          # Generates results_pipeline.csv & pipeline/results.csv
 
-# Run NLI pipeline
-python -m pipeline_nli.run_pipeline
+# Run Pipeline 2 (NLI Transformer Engine)
+python3 -m pipeline_nli.run_pipeline # Generates results_nli.csv & pipeline_nli/results.csv
 
-# Run GenAI pipeline
-python -m pipelinegenai.run_pipeline
+# Run Pipeline 3 (GenAI Reasoner Engine)
+python3 -m pipelinegenai.run_pipeline # Generates results_genai.csv & pipelinegenai/results.csv
 ```
 
 ---
 
-## Verification & Validation Metrics
+## Performance & Accuracy Benchmark
 
-Running `pipeline.run_all` evaluates against a 20% stratified holdout of `train.csv` and outputs full evaluation metrics to `artifacts/final/train_evaluation.json`:
+Evaluating Pipeline 1 against the stratified validation holdout (`artifacts/final/train_evaluation.json`):
 
 ```json
 {
   "split": "validation (20% stratified holdout)",
   "metrics": {
-    "accuracy": 0.75,
-    "precision": 0.80,
-    "recall": 0.80,
-    "f1": 0.80,
-    "confusion_matrix": [[4, 2], [2, 8]]
+    "accuracy": 0.625,
+    "precision": 0.667,
+    "recall": 0.800,
+    "f1": 0.727,
+    "confusion_matrix": [[2, 4], [2, 8]]
   }
 }
 ```
 
 ---
 
-## Sub-Pipeline Documentation
+## Sub-Pipeline Detailed Documentation
 
-For in-depth stage breakdowns, refer to the respective documentation:
-- [Pipeline 1: Pathway RAG Engine README](pipeline/README.md)
-- [Pipeline 2: NLI Transformer Pipeline README](pipeline_nli/README.md)
-- [Pipeline 3: GenAI Reasoner & Guardrails README](pipelinegenai/README.md)
+For full architectural breakdowns, step-by-step module flows, and schema definitions, see:
+- 📖 [Pipeline 1: Pathway RAG Engine Documentation](pipeline/README.md)
+- 📖 [Pipeline 2: Natural Language Inference Documentation](pipeline_nli/README.md)
+- 📖 [Pipeline 3: GenAI Reasoner & Guardrails Documentation](pipelinegenai/README.md)

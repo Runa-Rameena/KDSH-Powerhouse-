@@ -1,8 +1,8 @@
 {
-  "method": "tfidf",
+  "method": "sbert",
   "shape": [
     993,
-    2048
+    384
   ],
   "index_backend": "sklearn"
 }

@@ -1,6 +1,6 @@
 row_id,story_id,claim_id,chunk_id,similarity,evaluation,confidence,start_pos,end_pos
-60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_203,0.025974025974025976,NEUTRAL,0.02,710500,714500
-60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_36,0.02313624678663239,SUPPORTS,0.40555555555555556,126000,130000
-60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_75,0.023076923076923078,NEUTRAL,0.02,262500,266500
-60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_193,0.023017902813299233,NEUTRAL,0.02,675500,679500
-60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_145,0.022900763358778626,NEUTRAL,0.02,507500,511500
+60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_69,0.5318878659053523,CONTRADICTS,0.5055555555555555,241500,245500
+60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_50,0.47016970930944135,SUPPORTS,0.37777777777777777,175000,179000
+60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_92,0.46809735918903295,SUPPORTS,0.40555555555555556,322000,326000
+60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_70,0.4655419708204692,SUPPORTS,0.37777777777777777,245000,249000
+60,In Search of the Castaways,b3a039363155,In Search of the Castaways_chunk_39,0.4617858088842298,SUPPORTS,0.37777777777777777,136500,140500

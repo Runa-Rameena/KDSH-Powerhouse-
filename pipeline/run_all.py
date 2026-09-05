@@ -72,14 +72,12 @@ def gather_results():
         raise SystemExit(f'ID mismatch: missing {len(missing)}, extra {len(extra)}')
 
     out_df = pd.DataFrame(rows)
-    root_csv = ROOT_DIR / 'results.csv'
     pipeline_alias = ROOT_DIR / 'results_pipeline.csv'
     pipeline_csv = PIPELINE_DIR / 'results.csv'
 
-    out_df.to_csv(root_csv, index=False, encoding='utf-8')
     out_df.to_csv(pipeline_alias, index=False, encoding='utf-8')
     out_df.to_csv(pipeline_csv, index=False, encoding='utf-8')
-    logging.info('Wrote results to %s, %s, and %s (%d rows)', root_csv, pipeline_alias, pipeline_csv, len(rows))
+    logging.info('Wrote results to %s and %s (%d rows)', pipeline_alias, pipeline_csv, len(rows))
 
 if __name__ == '__main__':
     for m in MODULES:
