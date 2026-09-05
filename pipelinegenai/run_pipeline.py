@@ -6,6 +6,10 @@ import pandas as pd
 GENAI_DIR = Path(__file__).resolve().parent
 ROOT_DIR = GENAI_DIR.parent
 
+import sys
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 try:
     from . import genai_integration
     from .models import Claim, ClaimDecision
@@ -21,7 +25,7 @@ except Exception:
         if 'claim extractor' in sp:
             return json.dumps({"claims": []})
         if 'reasoner' in sp:
-            return json.dumps({"label": "SUPPORT", "evidence_ids": [], "rationale": "consistent with narrative context"})
+            return json.dumps({"label": "SUPPORT", "evidence_ids": ["c1"], "rationale": "consistent with narrative context"})
         return json.dumps({})
 
 def run():

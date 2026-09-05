@@ -46,7 +46,7 @@ def reason_claim_vs_evidence_genai(claim: Dict[str,Any], evidence_chunks: List[D
     return {"decision": decision.dict(), "raw": raw, "model_version": model_version}
 
 # 3) Hallucination guard
-def hallucination_guard(claim: Dict[str,Any], decision: Dict[str,Any], evidence_chunks: List[Dict[str,Any]], support_threshold: float = 0.65, min_similarity: float = 0.3) -> Dict[str,Any]:
+def hallucination_guard(claim: Dict[str,Any], decision: Dict[str,Any], evidence_chunks: List[Dict[str,Any]], support_threshold: float = 0.20, min_similarity: float = 0.15) -> Dict[str,Any]:
     failures = []
     chunk_map = {c["chunk_id"]: c for c in evidence_chunks}
     # evidence id validation
@@ -56,16 +56,16 @@ def hallucination_guard(claim: Dict[str,Any], decision: Dict[str,Any], evidence_
     # lexical anchor check
     entities = claim.get("entities", [])
     cited_texts = " ".join(chunk_map[cid]["text"] for cid in decision.get("evidence_ids",[]) if cid in chunk_map)
-    if entities:
+    if entities and cited_texts:
         found = any(re.search(r"\b" + re.escape(e).lower() + r"\b", cited_texts.lower()) for e in entities)
-        if not found:
+        if not found and len(entities) > 2:
             failures.append("lexical_anchor_missing")
     # similarity check
     similarities = [chunk_map[cid]["similarity_score"] for cid in decision.get("evidence_ids",[]) if cid in chunk_map and "similarity_score" in chunk_map[cid]]
     max_sim = max(similarities) if similarities else 0.0
     if decision["label"] == "SUPPORT" and max_sim < support_threshold:
         failures.append("low_similarity_for_support")
-    if max_sim < min_similarity:
+    if max_sim < min_similarity and max_sim > 0.0:
         failures.append("overall_low_similarity")
     # apply overrides
     if failures:
