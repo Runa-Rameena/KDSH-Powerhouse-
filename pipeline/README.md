@@ -98,9 +98,11 @@ python3 -m pipeline.run_all
 
 ---
 
-## Performance & Accuracy Benchmark
+## Performance & Accuracy Benchmark (Pipeline 1)
 
-- **Validation Accuracy**: **62.5%**
-- **Recall**: **80.0%**
-- **Precision**: **66.7%**
-- **F1-Score**: **72.7%**
+| Metric | Score | Detail |
+| :--- | :---: | :--- |
+| **Accuracy** | **62.5%** | Correct binary consistency decisions across dataset |
+| **F1-Score** | **0.727** | Harmonic mean of precision and recall |
+| **Recall** | **80.0%** | Capability to detect true consistent backstories |
+| **Precision** | **66.7%** | Proportion of positive predictions that are accurate |

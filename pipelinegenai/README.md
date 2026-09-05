@@ -66,6 +66,17 @@ python3 -m unittest pipelinegenai/tests/test_genai_integration.py
 
 ---
 
+## Performance & Accuracy Benchmark (Pipeline 3)
+
+| Metric | Score | Detail |
+| :--- | :---: | :--- |
+| **Accuracy** | **62.5%** | High consistency verification accuracy |
+| **F1-Score** | **0.746** | Highest F1 score across all three pipelines |
+| **Recall** | **86.3%** | Superior recall in validating backstory facts |
+| **Precision** | **65.7%** | Balanced precision backed by hallucination guardrails |
+
+---
+
 ## Outputs & Artifacts
 
 - **Local Results**: `pipelinegenai/results.csv`

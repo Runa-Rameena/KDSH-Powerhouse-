@@ -71,6 +71,17 @@ python3 -m pipeline_nli.run_nli_smoke
 
 ---
 
+## Performance & Accuracy Benchmark (Pipeline 2)
+
+| Metric | Score | Detail |
+| :--- | :---: | :--- |
+| **Accuracy** | **48.7%** | Conservative entailment classification decisions |
+| **F1-Score** | **0.468** | Balanced harmonic precision-recall metric |
+| **Precision** | **69.2%** | High precision when detecting direct contradictions |
+| **Recall** | **35.3%** | Strict entailment filter trade-off |
+
+---
+
 ## Outputs & Artifacts
 
 - **Local Results**: `pipeline_nli/results.csv`
