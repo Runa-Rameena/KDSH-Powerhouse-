@@ -1,0 +1,7 @@
+{
+  "accuracy": 0.637,
+  "precision": 0.637,
+  "recall": 1.0,
+  "f1": 0.779,
+  "tuned_top_k": 8
+}
