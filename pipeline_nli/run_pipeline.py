@@ -1,31 +1,34 @@
-"""
-Entry point to run the pipeline end-to-end. Each step can be invoked separately.
-"""
-import argparse
-import subprocess
 import sys
 from pathlib import Path
 
-STEPS = [
-    ("step1", "step1_load_data.py"),
-    ("step2", "step2_claim_extraction.py"),
-    ("step3", "step3_retrieve_evidence.py"),
-    ("step4", "step4_nli_inference.py"),
-    ("step5", "step5_aggregate_decision.py"),
-]
+NLI_DIR = Path(__file__).resolve().parent
+ROOT_DIR = NLI_DIR.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+if str(NLI_DIR) not in sys.path:
+    sys.path.insert(0, str(NLI_DIR))
 
+try:
+    from . import step1_load_data
+    from . import step2_claim_extraction
+    from . import step3_retrieve_evidence
+    from . import step4_nli_inference
+    from . import step5_aggregate_decision
+except (ImportError, ValueError):
+    import step1_load_data
+    import step2_claim_extraction
+    import step3_retrieve_evidence
+    import step4_nli_inference
+    import step5_aggregate_decision
 
-def run_step(step_script: str):
-    print(f"Running {step_script}...")
-    subprocess.check_call([sys.executable, str(Path(__file__).parent / step_script)])
-
+def run_all():
+    print("Running Pipeline NLI...")
+    step1_load_data.run()
+    step2_claim_extraction.run()
+    step3_retrieve_evidence.run()
+    step4_nli_inference.run()
+    step5_aggregate_decision.run()
+    print("Pipeline NLI complete.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--steps", nargs="*", help="Steps to run (e.g. step1 step2). If omitted, runs all steps in order.")
-    args = parser.parse_args()
-    steps_to_run = args.steps if args.steps else [s[0] for s in STEPS]
-    for step_name, script in STEPS:
-        if step_name in steps_to_run:
-            run_step(script)
-    print("Pipeline run complete.")
+    run_all()

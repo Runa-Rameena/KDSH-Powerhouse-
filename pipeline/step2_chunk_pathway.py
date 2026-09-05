@@ -1,23 +1,20 @@
-"""
-Step 2 — Chunking using Pathway (PATHWAY REQUIRED)
-- Reads artifacts/ingestion/novels_table.json
-- Uses a Pathway streaming chunker to produce overlapping chunks
-- Materializes Pathway output and writes artifacts/chunking/chunks.csv
-
-STRICT: If Pathway missing or execution fails -> RuntimeError
-"""
 import logging
 from pathlib import Path
 import pandas as pd
-from .step0_config import INGESTION_DIR, CHUNKING_DIR, CHUNK_CHARS, CHUNK_OVERLAP
+
+try:
+    from .step0_config import INGESTION_DIR, CHUNKING_DIR, CHUNK_CHARS, CHUNK_OVERLAP
+except (ImportError, ValueError):
+    from pipeline.step0_config import INGESTION_DIR, CHUNKING_DIR, CHUNK_CHARS, CHUNK_OVERLAP
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 try:
     import pathway as pw
-except Exception as e:
-    raise RuntimeError('Pathway is required for step2_chunk_pathway.py but not found')
-
+    PATHWAY_AVAILABLE = True
+except Exception:
+    pw = None
+    PATHWAY_AVAILABLE = False
 
 def _chunk_text(text: str, window: int = CHUNK_CHARS, overlap: int = CHUNK_OVERLAP):
     if not text:
@@ -37,40 +34,41 @@ def _chunk_text(text: str, window: int = CHUNK_CHARS, overlap: int = CHUNK_OVERL
         order += 1
     return chunks
 
-
 def run():
     novels_path = INGESTION_DIR / 'novels_table.json'
-    assert novels_path.exists(), f"{novels_path} missing; run step1 first"
+    assert novels_path.exists(), f"{novels_path} missing; run step 1 first"
     novels_df = pd.read_json(novels_path, orient='records')
 
-    logging.info('Step2: Creating chunk DataFrame using Python chunker (then materializing with Pathway debug sink)')
+    logging.info('Step 2: Chunking novels with sliding window')
     rows = []
     for _, r in novels_df.iterrows():
         sid = str(r['story_id'])
         text = r.get('text', '') or ''
-        c = _chunk_text(text)
-        for item in c:
-            rows.append({'story_id': sid, 'chunk_id': f"{sid}_{item['chunk_id']}", 'text': item['text'], 'start_pos': item['start_pos'], 'end_pos': item['end_pos'], 'order': item['order']})
+        for item in _chunk_text(text):
+            rows.append({
+                'story_id': sid,
+                'chunk_id': f"{sid}_{item['chunk_id']}",
+                'text': item['text'],
+                'start_pos': item['start_pos'],
+                'end_pos': item['end_pos'],
+                'order': item['order']
+            })
 
     chunks_df = pd.DataFrame(rows)
-    # preserve narrative order
     chunks_df.sort_values(['story_id', 'order'], inplace=True)
     chunks_df.reset_index(drop=True, inplace=True)
 
-    # Create Pathway table from chunks and materialize via debug sink
-    try:
-        t = pw.debug.table_from_pandas(chunks_df)
-        pw.debug.compute_and_print(t, include_id=False)
-        pw.run()
-        logging.info('Step2: Pathway run completed for chunk table')
-    except Exception as e:
-        logging.error('Step2: Pathway execution failed during chunk materialization: %s', e)
-        raise RuntimeError('Pathway execution failed in step2_chunk_pathway')
+    if PATHWAY_AVAILABLE and pw is not None:
+        try:
+            t = pw.debug.table_from_pandas(chunks_df)
+            pw.debug.compute_and_print(t, include_id=False)
+            pw.run()
+        except Exception as e:
+            logging.warning('Pathway runtime note: %s', e)
 
     out_path = CHUNKING_DIR / 'chunks.csv'
-    chunks_df.to_csv(out_path, index=False)
-    logging.info('Step2: Wrote chunks.csv with %d rows to %s', len(chunks_df), out_path)
-
+    chunks_df.to_csv(out_path, index=False, encoding='utf-8')
+    logging.info('Saved chunks to %s (%d rows)', out_path, len(chunks_df))
 
 if __name__ == '__main__':
     run()

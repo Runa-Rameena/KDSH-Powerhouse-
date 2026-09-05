@@ -1,47 +1,35 @@
-# pipeline_nli
+# Natural Language Inference (NLI) Verification Pipeline
 
-This pipeline validates whether a backstory is compatible with a novel using Natural Language Inference (NLI).
+This directory contains the NLI-based narrative consistency pipeline for the Kharagpur Data Science Hackathon (KDSH).
 
-## Why NLI?
-NLI models explicitly reason about whether a hypothesis (the claim) is entailed, contradicted, or neutral given a premise (novel text). This makes them a natural fit for contradiction detection: contradictions indicate a claim that is incompatible with the novel.
+---
 
-## How this differs from the Pathway+heuristic approach
-- This pipeline uses NLI classification on textual claim vs. retrieved context pairs, rather than handcrafted heuristics over retrieved facts.
-- Pathway (or a deterministic TF-IDF fallback) is used only for retrieval/indexing; inference is done with a pretrained transformer NLI model.
-- All steps are deterministic and traceable: claim → chunk → NLI label.
+## Overview
 
-## Strengths
-- More semantic verification (captures paraphrases, implicit support) compared to simple keyword heuristics.
-- Traceability: each decision can be traced back to the contributing chunks and NLI labels.
+The NLI pipeline evaluates narrative consistency by treating novel excerpts as premises and extracted backstory claims as hypotheses. It classifies each pair into Entailment, Contradiction, or Neutral using transformer NLI (or calibrated entity-aware heuristic inference when running offline).
 
-## Limitations
-- NLI models can be sensitive to premise length and domain shifts.
-- Requires good retrieval: if relevant evidence isn't retrieved, the NLI model cannot support or contradict the claim.
-- No generative LLMs used—this preserves determinism but limits reasoning complexity.
+### Pipeline Stages
+1. **`step1_load_data.py`**: Ingests train and test datasets, normalizing text fields into structured JSON artifacts.
+2. **`step2_claim_extraction.py`**: Splits backstory narratives into discrete atomic claims.
+3. **`step3_retrieve_evidence.py`**: Chunks full novel texts and retrieves top-k relevant excerpts per claim.
+4. **`step4_nli_inference.py`**: Executes batched NLI inference across (premise, hypothesis) pairs.
+5. **`step5_aggregate_decision.py`**: Aggregates chunk-level labels to row decisions and generates formatted results.
+6. **`run_pipeline.py`**: End-to-end runner orchestrating steps 1 through 5.
 
-## How to run
-1. Install dependencies (recommended in a virtualenv):
+---
+
+## How to Run
 
 ```bash
-pip install -r requirements.txt
-# If you plan to use Pathway, install it:
-# pip install pathway
+# Run end-to-end NLI pipeline
+python -m pipeline_nli.run_pipeline
 ```
 
-2. Run full pipeline:
+---
 
-```bash
-python pipeline_nli/run_pipeline.py
-```
+## Outputs & Artifacts
 
-3. Run steps individually:
-
-```bash
-python pipeline_nli/run_pipeline.py --steps step1 step2
-```
-
-Artifacts are created under `artifacts/pipeline_nli/`.
-
-## Notes
-- This pipeline attempts to use `pathway` for indexing if available; otherwise it falls back to a deterministic TF-IDF/overlap retriever.
-- To change NLI model, edit `pipeline_nli/step0_config.py` (NLI_MODEL).
+- **Pipeline Results**: `pipeline_nli/results.csv`
+- **Root Results**: `results_nli.csv`
+- **Metrics (if train split evaluated)**: `artifacts/pipeline_nli/metrics/metrics.json`
+- **Schema**: `id,predicted_label,rationale` (1 = Consistent, 0 = Contradict)

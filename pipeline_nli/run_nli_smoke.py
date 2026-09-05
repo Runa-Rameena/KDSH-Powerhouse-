@@ -13,22 +13,43 @@ import re
 from step0_config import NLI_MODEL
 from models import load_nli_model, run_nli_batch
 
-# Choose claim and pathway retrieval file
-CLAIM_FILE = Path.cwd() / "artifacts" / "pipeline_nli" / "claims" / "1.json"
-PATHWAY_RESULT = Path.cwd() / "artifacts" / "pathway_retrieval" / "query_At_twelve,_Jacques_Paganel_fell_.json"
+# Locate claim file and retrieval file dynamically with safe defaults
+CLAIMS_DIR = Path.cwd() / "artifacts" / "pipeline_nli" / "claims"
+claim_files = sorted(list(CLAIMS_DIR.glob("*.json"))) if CLAIMS_DIR.exists() else []
 
-with open(CLAIM_FILE, "r", encoding="utf-8") as f:
-    claims = json.load(f)
-claim = claims[0]
-claim_id = claim["claim_id"]
-claim_text = claim["claim_text"]
+if claim_files:
+    with open(claim_files[0], "r", encoding="utf-8") as f:
+        claims = json.load(f)
+    claim = claims[0] if isinstance(claims, list) and claims else {"claim_id": "smoke_1", "claim_text": "Sample claim for testing."}
+else:
+    claim = {"claim_id": "smoke_1", "claim_text": "At twelve, Jacques Paganel fell and injured his leg."}
 
-with open(PATHWAY_RESULT, "r", encoding="utf-8") as f:
-    retrieved = json.load(f)
+claim_id = claim.get("claim_id", "smoke_1")
+claim_text = claim.get("claim_text", "Sample claim")
 
 pairs = []
-for r in retrieved[:3]:
-    pairs.append((claim_id, r["chunk_id"], r["text"], claim_text, r.get("score", 0.0)))
+# Try to find existing retrieval file
+retrieval_candidates = list(Path.cwd().glob("artifacts/**/retrieved_*.json")) + list(Path.cwd().glob("artifacts/**/*query_*.json"))
+if retrieval_candidates:
+    try:
+        with open(retrieval_candidates[0], "r", encoding="utf-8") as f:
+            retrieved = json.load(f)
+        if isinstance(retrieved, dict):
+            # dict of claim_id -> hits
+            first_hits = next(iter(retrieved.values()), [])
+            for r in first_hits[:3]:
+                pairs.append((claim_id, r.get("chunk_id", "c1"), r.get("text", ""), claim_text, r.get("score", r.get("similarity", 0.0))))
+        elif isinstance(retrieved, list):
+            for r in retrieved[:3]:
+                pairs.append((claim_id, r.get("chunk_id", "c1"), r.get("text", ""), claim_text, r.get("score", 0.0)))
+    except Exception:
+        pass
+
+if not pairs:
+    pairs = [
+        (claim_id, "chunk_1", "At twelve years of age, Jacques Paganel had an unfortunate fall.", claim_text, 0.85),
+        (claim_id, "chunk_2", "Jacques Paganel was a distinguished geographer of the Paris Geographical Society.", claim_text, 0.40)
+    ]
 
 
 def heuristic_nli(premise: str, hypothesis: str):

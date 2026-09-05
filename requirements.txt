@@ -1,0 +1,32 @@
+# ==========================================
+# KDSH-Powerhouse Dependencies
+# ==========================================
+
+# Core Data Science & Numerical Processing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Deep Learning & Transformers (NLI & Embeddings)
+torch>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.0
+
+# Schema Validation & Models
+pydantic>=1.10.0
+jsonschema>=4.17.0
+
+# Utilities & CLI Progress
+tqdm>=4.65.0
+requests>=2.31.0
+
+# Testing & Quality Assurance
+pytest>=7.3.0
+
+# ==========================================
+# Optional High-Performance Dependencies
+# (Uncomment based on environment / platform)
+# ==========================================
+# faiss-cpu>=1.7.4          # Fast vector similarity search (recommended)
+# pathway>=0.10.0           # Streaming RAG and real-time ingestion (Linux / WSL / Docker only)

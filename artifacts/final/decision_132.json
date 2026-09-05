@@ -1,5 +1,5 @@
 {
   "id": "132",
-  "predicted_label": 0,
-  "rationale": "DECISION=CONTRADICT | rule=ratio | C=1.66 | S=0.05 | ratio=33.27 | thresh=1.80"
+  "predicted_label": 1,
+  "rationale": "DECISION=SUPPORT | rule=supported | S=1.69 | support_count=1 | max_confidence=0.42"
 }

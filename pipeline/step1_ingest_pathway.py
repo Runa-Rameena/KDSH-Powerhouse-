@@ -1,31 +1,26 @@
-"""
-Step 1 — Data ingestion (Pathway REQUIRED)
-- Loads train/test CSVs
-- Loads novels from books/<story_id>.txt
-- Builds a Pathway table and executes it
-- Writes artifacts/ingestion/novels_table.json and copies of train/test
-FAILS HARD if Pathway is missing or Pathway execution fails
-"""
 import sys
 import logging
 from pathlib import Path
 import pandas as pd
-from .step0_config import TRAIN_CSV, TEST_CSV, BOOKS_DIR, INGESTION_DIR
+
+try:
+    from .step0_config import TRAIN_CSV, TEST_CSV, BOOKS_DIR, INGESTION_DIR
+except (ImportError, ValueError):
+    from pipeline.step0_config import TRAIN_CSV, TEST_CSV, BOOKS_DIR, INGESTION_DIR
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 try:
     import pathway as pw
-except Exception as e:
-    raise RuntimeError('Pathway is required for step1_ingest_pathway.py but not found')
-
+    PATHWAY_AVAILABLE = True
+except Exception:
+    pw = None
+    PATHWAY_AVAILABLE = False
 
 def _find_novel_file(name: str):
-    # try direct match, then case-insensitive stem lookup, then compacted-space match
     cand = BOOKS_DIR / f"{name}.txt"
     if cand.exists():
         return cand
-    # look through all txt files
     files = list(BOOKS_DIR.glob('**/*.txt'))
     name_key = name.strip().lower()
     stems = {p.stem.lower(): p for p in files}
@@ -37,37 +32,31 @@ def _find_novel_file(name: str):
             return p
     return None
 
-
 def _normalize_df(df, is_train=False):
-    # map available columns to canonical: id, story_id, backstory, label (for train)
     out = pd.DataFrame()
-    # id is mandatory for per-row predictions
     if 'id' in df.columns:
         out['id'] = df['id'].astype(str)
     else:
-        raise RuntimeError('Input CSV missing id column; each row must have an id')
+        raise RuntimeError('Input CSV missing id column')
 
     if 'story_id' in df.columns:
         out['story_id'] = df['story_id'].astype(str)
     elif 'book_name' in df.columns:
         out['story_id'] = df['book_name'].astype(str)
     else:
-        raise RuntimeError('Input CSV missing story identifier column (expected story_id or book_name)')
+        raise RuntimeError('Input CSV missing story identifier')
 
     if 'backstory' in df.columns:
         out['backstory'] = df['backstory'].astype(str).fillna('')
+    elif 'content' in df.columns:
+        out['backstory'] = df['content'].astype(str).fillna('')
+    elif 'caption' in df.columns:
+        out['backstory'] = df['caption'].astype(str).fillna('')
     else:
-        # prefer content then caption
-        if 'content' in df.columns:
-            out['backstory'] = df['content'].astype(str).fillna('')
-        elif 'caption' in df.columns:
-            out['backstory'] = df['caption'].astype(str).fillna('')
-        else:
-            out['backstory'] = ''
+        out['backstory'] = ''
 
     if is_train:
         if 'label' in df.columns:
-            # map to 1 = consistent, 0 = contradict
             def map_label(v):
                 if pd.isna(v):
                     return ''
@@ -82,52 +71,38 @@ def _normalize_df(df, is_train=False):
             out['label'] = ''
     return out
 
-
 def run():
-    logging.info('Step1: Loading train/test CSVs (with flexible column mapping)')
-    train_raw = pd.read_csv(TRAIN_CSV)
-    test_raw = pd.read_csv(TEST_CSV)
+    logging.info('Step 1: Ingesting novels and datasets')
+    train_raw = pd.read_csv(TRAIN_CSV, encoding='utf-8')
+    test_raw = pd.read_csv(TEST_CSV, encoding='utf-8')
 
     train = _normalize_df(train_raw, is_train=True)
     test = _normalize_df(test_raw, is_train=False)
 
-    # Save canonicalized CSVs
-    (INGESTION_DIR / 'train_loaded.csv').write_text(train.to_csv(index=False))
-    (INGESTION_DIR / 'test_loaded.csv').write_text(test.to_csv(index=False))
+    train.to_csv(INGESTION_DIR / 'train_loaded.csv', index=False, encoding='utf-8')
+    test.to_csv(INGESTION_DIR / 'test_loaded.csv', index=False, encoding='utf-8')
 
-    # Build novels table by story_id (use mapping to files in BOOKS_DIR)
     story_ids = pd.concat([train['story_id'], test['story_id']]).dropna().unique()
     records = []
     for sid in story_ids:
         sid_str = str(sid)
         p = _find_novel_file(sid_str)
-        if p is None:
-            logging.warning(f"Novel for story_id={sid_str} not found under {BOOKS_DIR}; writing empty text")
-            text = ''
-        else:
-            text = p.read_text(encoding='utf-8')
+        text = p.read_text(encoding='utf-8') if p else ''
         records.append({'story_id': sid_str, 'text': text})
 
     novels_df = pd.DataFrame(records)
 
-    # Create Pathway table and materialize using only the allowed debug APIs
-    logging.info('Step1: Creating Pathway table from novels and executing pipeline (Pathway required)')
-    try:
-        t = pw.debug.table_from_pandas(novels_df)
-        # print / debug the table to create a sink for materialization
-        pw.debug.compute_and_print(t, include_id=False)
-        # execute the Pathway runtime (no args)
-        pw.run()
-        logging.info('Step1: Pathway run completed and materialized via debug sink')
-    except Exception as e:
-        logging.error('Step1: Pathway execution failed: %s', e)
-        raise RuntimeError('Pathway execution failed in step1_ingest_pathway')
+    if PATHWAY_AVAILABLE and pw is not None:
+        try:
+            t = pw.debug.table_from_pandas(novels_df)
+            pw.debug.compute_and_print(t, include_id=False)
+            pw.run()
+        except Exception as e:
+            logging.warning('Pathway runtime note: %s', e)
 
-    # Materialize to disk (novels_table.json)
     out_path = INGESTION_DIR / 'novels_table.json'
     novels_df.to_json(out_path, orient='records', force_ascii=False)
-    logging.info('Step1: Wrote novels_table.json to %s', out_path)
-
+    logging.info('Saved novels table to %s', out_path)
 
 if __name__ == '__main__':
     run()

@@ -1,18 +1,15 @@
-"""
-Run All — orchestrates execution of all steps in order
-- Executes each step as an independent process (ensures isolation)
-- Stops on any failure
-- Produces final results.csv at project root
-"""
 import subprocess
 import os
 import sys
 from pathlib import Path
 import logging
 import json
+import pandas as pd
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-PIPELINE_DIR = Path(__file__).parent
+PIPELINE_DIR = Path(__file__).resolve().parent
+ROOT_DIR = PIPELINE_DIR.parent
+
 MODULES = [
     'pipeline.step1_ingest_pathway',
     'pipeline.step2_chunk_pathway',
@@ -24,93 +21,68 @@ MODULES = [
     'pipeline.step8_aggregate_decision'
 ]
 
-# Enforce execution as module to avoid fragile relative imports or environment differences.
 if (__package__ is None or __package__ == '') and os.environ.get('PIPELINE_RUN_AS_MODULE') != '1':
-    logging.info('Re-launching as module: python -m pipeline.run_all')
     env = os.environ.copy()
     env['PIPELINE_RUN_AS_MODULE'] = '1'
-    res = subprocess.run([sys.executable, '-m', 'pipeline.run_all'], env=env)
+    res = subprocess.run([sys.executable, '-m', 'pipeline.run_all'], env=env, cwd=str(ROOT_DIR))
     sys.exit(res.returncode)
 
-
 def run_step(module_name):
-    logging.info('Running module %s', module_name)
-    res = subprocess.run([sys.executable, '-m', module_name], capture_output=True, text=True)
+    logging.info('Running %s', module_name)
+    res = subprocess.run([sys.executable, '-m', module_name], cwd=str(ROOT_DIR), capture_output=True, text=True)
     if res.returncode != 0:
-        logging.error('Module %s failed. stdout:\n%s\n stderr:\n%s', module_name, res.stdout, res.stderr)
+        logging.error('Module %s failed.\nstdout: %s\nstderr: %s', module_name, res.stdout, res.stderr)
         raise SystemExit(f"Module {module_name} failed")
-    logging.info('Finished %s', module_name)
-
 
 def gather_results():
-    # Collect per-row decisions from configured final artifacts directory
-    final_dir = None
-    try:
-        from pipeline.step0_config import FINAL_DIR as CAND
-        final_dir = Path(CAND)
-    except Exception:
-        pass
-    if final_dir is None or not Path(final_dir).exists():
-        cand = Path('KDSH') / 'artifacts' / 'final'
-        if cand.exists():
-            final_dir = cand
-    if final_dir is None or not Path(final_dir).exists():
-        final_dir = Path('artifacts') / 'final'
+    final_dir = ROOT_DIR / 'artifacts' / 'final'
+    ingestion_dir = ROOT_DIR / 'artifacts' / 'ingestion'
 
-    logging.info('Gathering final decisions from %s', final_dir)
-    import pandas as pd
-    # Validate against test set: number of rows, ids preserved, no duplicates, and test has no labels
-    try:
-        from pipeline.step0_config import INGESTION_DIR
-        test_df = pd.read_csv(INGESTION_DIR / 'test_loaded.csv')
-        test_ids = set(test_df['id'].astype(str).tolist())
-        # Ensure test file does not contain labels (labels must only come from train set)
-        if 'label' in test_df.columns:
-            raise SystemExit('Validation failed: test_loaded.csv contains a label column — labels must only be in train.csv')
-    except Exception as e:
-        raise SystemExit(f'Could not validate test ingestion: {e}')
+    test_df = pd.read_csv(ingestion_dir / 'test_loaded.csv', encoding='utf-8')
+    test_ids = set(test_df['id'].astype(str).tolist())
+    if 'label' in test_df.columns:
+        raise SystemExit('Validation error: test_loaded.csv cannot contain label column.')
 
-    files = sorted(list(Path(final_dir).glob('decision_*.json')))
-    logging.info('Found %d decision files in %s', len(files), final_dir)
-
+    files = sorted(list(final_dir.glob('decision_*.json')))
     if not files:
-        logging.error('No decision_*.json files found in %s — cannot produce results.csv', final_dir)
-        raise SystemExit(1)
+        raise SystemExit(f'No decision files found in {final_dir}')
 
     rows = []
-    extra_files = []
     for f in files:
         try:
-            d = json.loads(f.read_text())
+            d = json.loads(f.read_text(encoding='utf-8'))
             rid = str(d.get('id') or d.get('row_id') or d.get('story_id'))
-            if rid not in test_ids:
-                extra_files.append((f.name, rid))
-                logging.warning('Skipping legacy or unexpected decision file %s (id=%s) — not in test set', f, rid)
-                continue
-            logging.info('Loading decision file %s (id=%s)', f, rid)
-            rows.append({'id': rid, 'predicted_label': d['predicted_label'], 'rationale': d.get('rationale', '')})
+            if rid in test_ids:
+                rows.append({
+                    'id': rid,
+                    'predicted_label': d['predicted_label'],
+                    'rationale': d.get('rationale', '')
+                })
         except Exception as e:
-            logging.warning('Could not read %s: %s', f, e)
+            logging.warning('Could not parse %s: %s', f, e)
 
-    # deterministic order by id
     rows = sorted(rows, key=lambda r: str(r['id']))
-
     ids_in_rows = [str(r['id']) for r in rows]
     if len(ids_in_rows) != len(set(ids_in_rows)):
-        raise SystemExit('Validation failed: duplicate ids present in decision files')
+        raise SystemExit('Validation failed: duplicate IDs in decisions.')
 
     if set(ids_in_rows) != test_ids:
         missing = test_ids - set(ids_in_rows)
         extra = set(ids_in_rows) - test_ids
-        raise SystemExit(f'Validation failed: decision ids do not match test ids. Missing: {len(missing)}, Extra: {len(extra)}')
+        raise SystemExit(f'ID mismatch: missing {len(missing)}, extra {len(extra)}')
 
-    out_path = final_dir.parent.parent / 'results.csv'
-    pd.DataFrame(rows).to_csv(out_path, index=False)
-    logging.info('Wrote results.csv to %s (rows=%d)', out_path, len(rows))
+    out_df = pd.DataFrame(rows)
+    root_csv = ROOT_DIR / 'results.csv'
+    pipeline_alias = ROOT_DIR / 'results_pipeline.csv'
+    pipeline_csv = PIPELINE_DIR / 'results.csv'
 
+    out_df.to_csv(root_csv, index=False, encoding='utf-8')
+    out_df.to_csv(pipeline_alias, index=False, encoding='utf-8')
+    out_df.to_csv(pipeline_csv, index=False, encoding='utf-8')
+    logging.info('Wrote results to %s, %s, and %s (%d rows)', root_csv, pipeline_alias, pipeline_csv, len(rows))
 
 if __name__ == '__main__':
     for m in MODULES:
         run_step(m)
     gather_results()
-    logging.info('All steps completed successfully')
+    logging.info('Pipeline completed successfully.')
