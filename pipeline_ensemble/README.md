@@ -14,7 +14,7 @@ This directory contains the **Consensus Ensemble & Tuned Retrieval Pipeline**. I
   - **Pipeline 3 (GenAI Reasoner)** Weight: `0.40`
 - **Consensus Rule**:
   $$\text{Score} = (0.40 \times P_1) + (0.20 \times P_2) + (0.40 \times P_3)$$
-  $$\text{Predicted Label} = \begin{cases} 1 & \text{if Score} \ge 0.50 \\ 0 & \text{if Score} < 0.50 \end{cases}$$
+  $$\text{Predicted Label} = \begin{cases} 1 & \text{if Score} \ge 0.60 \\ 0 & \text{if Score} < 0.60 \end{cases}$$
 
 ---
 

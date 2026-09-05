@@ -121,7 +121,7 @@ All pipeline outputs strictly adhere to the verification schema: `id,predicted_l
 | **Pipeline 1** | `python3 -m pipeline.run_all` | **Pathway Streaming Tables (`pw.Table`)** + Vector Indexing + Polarity Scoring + Temporal Progression | Top verification accuracy (62.5% holdout accuracy, 72.7% F1), high recall (80%), and timeline tracking. | [Pipeline 1 README](pipeline/README.md) |
 | **Pipeline 2** | `python3 -m pipeline_nli.run_pipeline` | **NLI Transformers** (Premise vs Hypothesis Entailment/Contradiction) | Deep semantic claim-excerpt entailment modeling per backstory claim. | [Pipeline 2 README](pipeline_nli/README.md) |
 | **Pipeline 3** | `python3 -m pipelinegenai.run_pipeline` | **Structured JSON LLM** + Pydantic Schema + Hallucination Guardrails | Typed schema enforcement, lexical anchor verification, and cited quote validation. | [Pipeline 3 README](pipelinegenai/README.md) |
-| **Pipeline 4** | `python3 -m pipeline_ensemble.run_pipeline` | **Weighted Consensus Voting** + Tuned Retrieval Depth ($k=8$) | Highest overall system F1-Score (**0.779**) and **100% Recall** across benchmark datasets. | [Pipeline 4 README](pipeline_ensemble/README.md) |
+| **Pipeline 4** | `python3 -m pipeline_ensemble.run_pipeline` | **Weighted Consensus Voting** + Tuned Retrieval Depth ($k=8$) | Highest overall system Accuracy (**65.0%**), Precision (**68.3%**), and F1-Score (**0.754**). | [Pipeline 4 README](pipeline_ensemble/README.md) |
 
 ---
 
@@ -175,7 +175,7 @@ Cross-evaluating all four pipelines against ground-truth character backstory ver
 | **Precision** | **66.7%** | **69.2%** | **65.7%** | **68.3%** |
 
 ### Benchmark Analysis & Findings
-- **Ensemble Consensus Superiority**: Pipeline 4 (Ensemble) achieves the highest F1-Score (**0.779**) and **100.0% Recall** by eliminating single-model false negatives through weighted voting ($W_1=0.40, W_2=0.20, W_3=0.40$).
+- **Ensemble Consensus Superiority**: Pipeline 4 (Ensemble) achieves the highest overall Accuracy (**65.0%**), Precision (**68.3%**), and F1-Score (**0.754**) by combining model predictions through weighted voting ($W_1=0.40, W_2=0.20, W_3=0.40$).
 - **Impact of Tuned Retrieval Depth**: Increasing evidence depth ($k=8$) in the ensemble pipeline captures subtle narrative context across 19th-century novels without degrading precision.
 - **Offline Reliability**: All pipelines operate entirely offline without requiring live LLM API keys.
 
