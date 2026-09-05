@@ -16,7 +16,24 @@ Natural Language Inference models formalize verification as:
 
 ---
 
-## Pipeline Stage Breakdown
+## Complete File Inventory & Purpose Breakdown
+
+| File Name | Purpose & Functionality |
+| :--- | :--- |
+| **`step0_config.py`** | NLI pipeline configuration (model names, device selection, batch sizes, confidence thresholds). |
+| **`step1_load_data.py`** | Data loader module normalizing train/test CSVs into structured JSON inputs (`id`, `story_id`, `backstory`). |
+| **`step2_claim_extraction.py`** | Sentence boundary parsing module isolating atomic claims from backstory paragraphs. |
+| **`step3_retrieve_evidence.py`** | Passage retriever searching unabridged novel text to extract candidate premises for each claim. |
+| **`step4_nli_inference.py`** | Batched NLI inference module executing classification over `(Premise, Hypothesis)` pairs. |
+| **`step5_aggregate_decision.py`** | Decision aggregator combining claim-level NLI labels into final backstory predictions and rationales. |
+| **`models.py`** | Transformer NLI model wrapper and rule-based heuristic fallback inference engine. |
+| **`run_nli_smoke.py`** | Smoke test script verifying NLI pipeline components and environment execution. |
+| **`run_pipeline.py`** | Master pipeline orchestrator executing steps 1–5 in sequence and generating CSV outputs. |
+| **`results.csv`** | Subfolder-isolated output CSV containing Pipeline 2 predictions (`id,predicted_label,rationale`). |
+
+---
+
+## Pipeline Stage Execution Diagram
 
 ```
 Input Data (train.csv / test.csv)
@@ -40,15 +57,6 @@ Input Data (train.csv / test.csv)
    run_pipeline.py ──────────► Master Pipeline Orchestrator
 ```
 
-### Component Details
-
-1. **`step1_load_data.py`**: Normalizes train/test CSVs, standardizing identifier keys (`id`, `story_id`, `backstory`).
-2. **`step2_claim_extraction.py`**: Uses sentence boundary disambiguation to isolate single-fact claims from multi-sentence character backstories.
-3. **`step3_retrieve_evidence.py`**: Performs lexical & vector retrieval to pull top matching novel passages per claim.
-4. **`step4_nli_inference.py`**: Computes NLI probabilities over `(Premise, Hypothesis)` pairs using sentence-transformers / cross-encoder NLI models (with entity-aware rule fallback for offline runtime).
-5. **`step5_aggregate_decision.py`**: Combines claim-level NLI decisions using a contradiction-priority rule: if *any* claim is contradicted by strong evidence, the backstory is marked as `0` (Contradict); otherwise `1` (Consistent).
-6. **`run_pipeline.py`**: Standalone module runner that executes steps 1–5 in sequence.
-
 ---
 
 ## How to Run
@@ -56,6 +64,9 @@ Input Data (train.csv / test.csv)
 ```bash
 # Execute end-to-end NLI pipeline
 python3 -m pipeline_nli.run_pipeline
+
+# Execute quick smoke test
+python3 -m pipeline_nli.run_nli_smoke
 ```
 
 ---
@@ -72,5 +83,3 @@ python3 -m pipeline_nli.run_pipeline
   46,1,"46_claim_1:SUPPORT, 46_claim_2:SUPPORT"
   137,0,"137_claim_1:CONTRADICT, 137_claim_2:NEUTRAL"
   ```
-  - `predicted_label`: `1` (Consistent / Support), `0` (Contradict)
-  - `rationale`: Detailed mapping of claim IDs and their respective NLI verdicts.

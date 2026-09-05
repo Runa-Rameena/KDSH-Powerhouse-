@@ -13,7 +13,27 @@ This directory contains the primary **Pathway Streaming RAG & Temporal Evidence 
 
 ---
 
-## Pipeline Architecture & Execution Stages
+## Complete File Inventory & Purpose Breakdown
+
+| File Name | Purpose & Functionality |
+| :--- | :--- |
+| **`step0_config.py`** | Central configuration file defining data paths, vector dimensions, retrieval top-$k$, and threshold constants ($\tau$). |
+| **`step1_ingest_pathway.py`** | Ingests novel texts (`Books/*.txt`) and input CSVs using Pathway streaming tables (`pw.Table`) with cross-platform fallback. |
+| **`step2_chunk_pathway.py`** | Pathway-powered sliding-window text chunker preserving paragraph and chapter boundaries. |
+| **`step3_index_embeddings.py`** | Encodes text chunks into dense vector embeddings using Sentence-Transformers / TF-IDF with FAISS vector indexing. |
+| **`step4_extract_claims.py`** | Parses character backstory narratives into testable atomic claim statements. |
+| **`step5_retrieve_evidence.py`** | Queries vector indices for each claim to retrieve top-$k$ relevant novel passages. |
+| **`step6_evaluate_claims.py`** | Sentence-level entity-aware polarity scoring module detecting direct negation vs stylistic phrasing. |
+| **`step7_temporal_analysis.py`** | Maps retrieved chunks to chapter positions and computes late-narrative progression weights. |
+| **`step8_aggregate_decision.py`** | Mathematical decision aggregator computing support/contradiction scores and outputting validation metrics (`train_evaluation.json`). |
+| **`llm_provider.py`** | Unified LLM interface supporting external API (OpenAI/Gemini) calls and deterministic entity-aware offline reasoning. |
+| **`metrics_genai_disagreements.py`** | Diagnostic evaluation utility analyzing prediction disagreements between different pipelines. |
+| **`run_all.py`** | Master pipeline orchestrator executing steps 1–8 sequentially and generating output CSVs. |
+| **`results.csv`** | Subfolder-isolated output CSV containing Pipeline 1 predictions (`id,predicted_label,rationale`). |
+
+---
+
+## Pipeline Stage Execution Diagram
 
 ```
 Raw Novels + Backstories 
@@ -46,18 +66,6 @@ Raw Novels + Backstories
    run_all.py ─────────────────► Master Orchestrator
 ```
 
-### Detailed Stage Breakdown
-
-1. **`step1_ingest_pathway.py`**: Reads novel texts (`Books/*.txt`) and normalizes input data into structured tables using Pathway streaming tables.
-2. **`step2_chunk_pathway.py`**: Applies sliding-window chunking (preserving paragraph boundaries and chapter headings) to maintain narrative context.
-3. **`step3_index_embeddings.py`**: Encodes novel chunks into high-dimensional vector embeddings using SBERT / TF-IDF with FAISS vector indexing.
-4. **`step4_extract_claims.py`**: Parses complex backstory narratives into atomic, testable claim statements (categorized by early life, beliefs, fears, motivations).
-5. **`step5_retrieve_evidence.py`**: Queries the vector index for each claim to extract the top-$k$ most relevant book excerpts.
-6. **`step6_evaluate_claims.py`**: Performs deep polarity scoring on retrieved excerpts against claims, detecting direct negation, entity alignment, and context match.
-7. **`step7_temporal_analysis.py`**: Map chunk positions to chapter progression, applying position multipliers for late-narrative reveals.
-8. **`step8_aggregate_decision.py`**: Computes overall support vs contradiction scores, applies decision rules, and generates decision rationales.
-9. **`run_all.py`**: End-to-end master orchestrator that executes steps 1–8 sequentially and collects final predictions.
-
 ---
 
 ## Pathway Streaming Engine Details
@@ -87,8 +95,6 @@ python3 -m pipeline.run_all
   46,1,"DECISION=SUPPORT | rule=supported | support_count=3 | max_confidence=0.85"
   137,0,"DECISION=CONTRADICT | rule=C>tau_and_dominates | C=2.40 | S=0.30 | tau=1.00"
   ```
-  - `predicted_label`: `1` (Consistent / Support), `0` (Contradict)
-  - `rationale`: Explainable audit trace containing decision rule, confidence scores, and support ratios.
 
 ---
 
